@@ -67,21 +67,6 @@
                 <li>
                 <a href="{{asset('coordinadors')}}">Coordinador de Carrera</a>
                 </li>
-                <li>
-                <a href="{{asset('alumnos')}}">Alumnos</a>
-                </li>
-                <li>
-                <a href="{{asset('empresas')}}">Empresas</a>
-                </li>
-                <li>
-                <a href="{{asset('lenguajes')}}">Idiomas</a>
-                </li>
-                <li>
-                <a href="{{asset('areas')}}">Areas</a>
-                </li>
-                <li>
-                <a href="{{asset('solicituds')}}">Solicitudes</a>
-                </li>
               </ul>
 
             @endif

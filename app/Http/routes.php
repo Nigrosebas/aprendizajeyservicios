@@ -242,3 +242,26 @@ Route::post('alumnoProyectos/store', [
     'as' => 'alumnoProyectos.store',
     'uses' => 'AlumnoProyectoController@store',
 ]);
+
+Route::resource('faculties', 'FacultyController');
+
+Route::get('faculties/{id}/delete', [
+    'as' => 'faculties.delete',
+    'uses' => 'FacultyController@destroy',
+]);
+
+
+Route::resource('courses', 'CourseController');
+
+Route::get('courses/{id}/delete', [
+    'as' => 'courses.delete',
+    'uses' => 'CourseController@destroy',
+]);
+
+
+Route::resource('coursealls', 'CourseallController');
+
+Route::get('coursealls/{id}/delete', [
+    'as' => 'coursealls.delete',
+    'uses' => 'CourseallController@destroy',
+]);

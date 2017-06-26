@@ -32,10 +32,10 @@ class University extends Model
     public function Profesor()
     {
         return $this->belongsTo('App\Models\Profesor', 'id','id_university');
-    }
-    public function Cursos()
+    }    
+    public function Faculty()
     {
-        return $this->hasMany('App\Models\Course', 'id','id_university');
+        return $this->hasMany('App\Models\Faculty', 'id','id_university');
     }
 
 }

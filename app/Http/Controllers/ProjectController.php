@@ -72,7 +72,7 @@ class ProjectController extends AppBaseController
 
 	public function create()
 	{
-		$cursos = Course::lists('nombre_carrera', 'id');
+		$cursos = Course::lists('name_course', 'id');
 		return view('projects.create')->with('cursos',$cursos);
 	}
 

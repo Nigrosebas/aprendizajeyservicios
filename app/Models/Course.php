@@ -10,7 +10,8 @@ class Course extends Model
 
 	public $fillable = [
 	    "id_university",
-		"nombre_carrera"
+		"id_faculty",
+		"name_course"
 	];
 
     /**
@@ -19,16 +20,18 @@ class Course extends Model
      * @var array
      */
     protected $casts = [
-        
+        "id_university" => "integer",
+		"id_faculty" => "integer",
+		"name_course" => "string"
     ];
 
 	public static $rules = [
 	    
 	];
 
-	public function Universidad()
+		public function Faculty()
     {
-        return $this->belongsTo('App\Models\University', 'id','id_university');
+        return $this->belongsTo('App\Models\Faculty','id','id_faculty');
     }
 
 }
