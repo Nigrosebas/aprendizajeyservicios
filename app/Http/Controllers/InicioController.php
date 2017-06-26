@@ -38,12 +38,12 @@ class InicioController extends AppBaseController
      */
     public function index()
     {
-        $alumnoProyectos = $this->alumnoProyectoRepository->paginate(200);
+        $alumnoproyectos = $this->alumnoProyectoRepository->paginate(200);
         $courses = $this->courseRepository->paginate(20);
         $projects = $this->projectRepository->paginate(20);
         return view('welcome')
         ->with('courses', $courses)
         ->with('projects', $projects)
-        ->with('alumnoProyectos', $alumnoProyectos);
+        ->with('alumnoproyectos', $alumnoproyectos);
     }
 }

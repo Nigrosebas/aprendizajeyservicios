@@ -21,7 +21,7 @@ class AlumnoProyectoRepository extends Repository
     {
         $query = AlumnoProyecto::query();
 
-        $columns = Schema::getColumnListing('alumnoProyectos');
+        $columns = Schema::getColumnListing('alumnoproyectos');
         $attributes = array();
 
         foreach($columns as $attribute)

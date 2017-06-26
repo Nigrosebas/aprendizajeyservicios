@@ -5,9 +5,9 @@
 
     @include('common.errors')
 
-    {!! Form::model($alumnoProyecto, ['route' => ['alumnoProyectos.update', $alumnoProyecto->id], 'method' => 'patch']) !!}
+    {!! Form::model($alumnoproyecto, ['route' => ['alumnoproyectos.update', $alumnoproyecto->id], 'method' => 'patch']) !!}
 
-        @include('alumnoProyectos.fields')
+        @include('alumnoproyectos.fields')
 
     {!! Form::close() !!}
 </div>

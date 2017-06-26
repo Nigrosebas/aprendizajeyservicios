@@ -231,15 +231,15 @@ Route::post('importExcelCursos',[
     'uses' =>'ImportController@importCursos']);
 Route::get('downloadExcelCursos/{type}', 'ImportController@downloadExcelCursos');
 
-Route::resource('alumnoProyectos', 'AlumnoProyectoController');
+Route::resource('alumnoproyectos', 'AlumnoProyectoController');
 
-Route::get('alumnoProyectos/{id}/delete', [
-    'as' => 'alumnoProyectos.delete',
+Route::get('alumnoproyectos/{id}/delete', [
+    'as' => 'alumnoproyectos.delete',
     'uses' => 'AlumnoProyectoController@destroy',
 ]);
 
-Route::post('alumnoProyectos/store', [
-    'as' => 'alumnoProyectos.store',
+Route::post('alumnoproyectos/store', [
+    'as' => 'alumnoproyectos.store',
     'uses' => 'AlumnoProyectoController@store',
 ]);
 

@@ -2,6 +2,6 @@
 
 @section('content')
 <div class="container">
-	 @include('alumnoProyectos.show_fields')
+	 @include('alumnoproyectos.show_fields')
 </div>
 @endsection

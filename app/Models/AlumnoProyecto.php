@@ -5,7 +5,7 @@ use Illuminate\Database\Eloquent\Model as Model;
 class AlumnoProyecto extends Model
 {
     
-	public $table = "alumnoProyectos";
+	public $table = "alumnoproyectos";
     
 
 	public $fillable = [

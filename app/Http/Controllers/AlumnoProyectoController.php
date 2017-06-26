@@ -28,10 +28,10 @@ class AlumnoProyectoController extends AppBaseController
 	 */
 	public function index()
 	{
-		$alumnoProyectos = $this->alumnoProyectoRepository->paginate(10);
+		$alumnoproyectos = $this->alumnoProyectoRepository->paginate(10);
 
-		return view('alumnoProyectos.index')
-			->with('alumnoProyectos', $alumnoProyectos);
+		return view('alumnoproyectos.index')
+			->with('alumnoproyectos', $alumnoproyectos);
 	}
 
 	/**
@@ -41,7 +41,7 @@ class AlumnoProyectoController extends AppBaseController
 	 */
 	public function create()
 	{
-		return view('alumnoProyectos.create');
+		return view('alumnoproyectos.create');
 	}
 
 	/**
@@ -68,16 +68,16 @@ class AlumnoProyectoController extends AppBaseController
 	 */
 	public function show($id)
 	{
-		$alumnoProyecto = $this->alumnoProyectoRepository->find($id);
+		$alumnoproyecto = $this->alumnoProyectoRepository->find($id);
 
-		if(empty($alumnoProyecto))
+		if(empty($alumnoproyecto))
 		{
 			Flash::error('AlumnoProyecto not found');
 
-			return redirect(route('alumnoProyectos.index'));
+			return redirect(route('alumnoproyectos.index'));
 		}
 
-		return view('alumnoProyectos.show')->with('alumnoProyecto', $alumnoProyecto);
+		return view('alumnoproyectos.show')->with('alumnoproyecto', $alumnoproyecto);
 	}
 
 	/**
@@ -89,16 +89,16 @@ class AlumnoProyectoController extends AppBaseController
 	 */
 	public function edit($id)
 	{
-		$alumnoProyecto = $this->alumnoProyectoRepository->find($id);
+		$alumnoproyecto = $this->alumnoProyectoRepository->find($id);
 
-		if(empty($alumnoProyecto))
+		if(empty($alumnoproyecto))
 		{
 			Flash::error('AlumnoProyecto not found');
 
-			return redirect(route('alumnoProyectos.index'));
+			return redirect(route('alumnoproyectos.index'));
 		}
 
-		return view('alumnoProyectos.edit')->with('alumnoProyecto', $alumnoProyecto);
+		return view('alumnoproyectos.edit')->with('alumnoproyecto', $alumnoproyecto);
 	}
 
 	/**
@@ -111,20 +111,20 @@ class AlumnoProyectoController extends AppBaseController
 	 */
 	public function update($id, UpdateAlumnoProyectoRequest $request)
 	{
-		$alumnoProyecto = $this->alumnoProyectoRepository->find($id);
+		$alumnoproyecto = $this->alumnoProyectoRepository->find($id);
 
-		if(empty($alumnoProyecto))
+		if(empty($alumnoproyecto))
 		{
 			Flash::error('AlumnoProyecto not found');
 
-			return redirect(route('alumnoProyectos.index'));
+			return redirect(route('alumnoproyectos.index'));
 		}
 
 		$this->alumnoProyectoRepository->updateRich($request->all(), $id);
 
 		Flash::success('AlumnoProyecto updated successfully.');
 
-		return redirect(route('alumnoProyectos.index'));
+		return redirect(route('alumnoproyectos.index'));
 	}
 
 	/**
@@ -140,7 +140,7 @@ class AlumnoProyectoController extends AppBaseController
 		$input = $request->all();
 		$rut = $input['rut'];
 		$id_proyecto = $input['id_proyecto'];
-		//$alumnoProyecto = AlumnoProyecto::select('id')->where('id_proyecto','=',$id_proyecto and 'rut', '=',$rut);
+		//$alumnoproyecto = AlumnoProyecto::select('id')->where('id_proyecto','=',$id_proyecto and 'rut', '=',$rut);
 		$results = DB::table('alumnoproyectos')->select('id')
 		->where('id_proyecto', $id_proyecto)
 		->where('rut',$rut)

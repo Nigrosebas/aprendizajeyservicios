@@ -125,7 +125,7 @@
               <th width="150px">Acceso</th>
             </thead>
           <tbody>
-          @foreach($alumnoProyectos as $aps)
+          @foreach($alumnoproyectos as $aps)
 
             @if($aps->rut == Auth::user()->alumno->rut_alumno) 
             

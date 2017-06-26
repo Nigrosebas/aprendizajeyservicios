@@ -13,7 +13,7 @@ class CreateAlumnoProyectosTable extends Migration
 	 */
 	public function up()
 	{
-		Schema::create('alumnoProyectos', function(Blueprint $table)
+		Schema::create('alumnoproyectos', function(Blueprint $table)
 		{
 			$table->increments('id');
 			$table->integer('id_proyecto');
@@ -32,7 +32,7 @@ class CreateAlumnoProyectosTable extends Migration
 	 */
 	public function down()
 	{
-		Schema::drop('alumnoProyectos');
+		Schema::drop('alumnoproyectos');
 	}
 
 }

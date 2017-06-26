@@ -6,14 +6,14 @@
     <th width="50px">Action</th>
     </thead>
     <tbody>
-    @foreach($alumnoProyectos as $alumnoProyecto)
+    @foreach($alumnoproyectos as $alumnoproyecto)
         <tr>
-            <td>{!! $alumnoProyecto->id_proyecto !!}</td>
-			<td>{!! $alumnoProyecto->rut !!}</td>
-			<td>{!! $alumnoProyecto->rol !!}</td>
+            <td>{!! $alumnoproyecto->id_proyecto !!}</td>
+			<td>{!! $alumnoproyecto->rut !!}</td>
+			<td>{!! $alumnoproyecto->rol !!}</td>
             <td>
-                <a href="{!! route('alumnoProyectos.edit', [$alumnoProyecto->id]) !!}"><i class="glyphicon glyphicon-edit"></i></a>
-                <a href="{!! route('alumnoProyectos.delete', [$alumnoProyecto->id]) !!}" onclick="return confirm('Are you sure wants to delete this AlumnoProyecto?')"><i class="glyphicon glyphicon-remove"></i></a>
+                <a href="{!! route('alumnoproyectos.edit', [$alumnoproyecto->id]) !!}"><i class="glyphicon glyphicon-edit"></i></a>
+                <a href="{!! route('alumnoproyectos.delete', [$alumnoproyecto->id]) !!}" onclick="return confirm('Are you sure wants to delete this AlumnoProyecto?')"><i class="glyphicon glyphicon-remove"></i></a>
             </td>
         </tr>
     @endforeach

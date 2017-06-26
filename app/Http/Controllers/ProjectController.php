@@ -123,7 +123,7 @@ class ProjectController extends AppBaseController
 		->with('project', $project)
 		->with('alumnos', $alumnos)
 		->with('profesors',$profesors)
-		->with('alumnoProyectos', $results);
+		->with('alumnoproyectos', $results);
 	}
 
 	/**

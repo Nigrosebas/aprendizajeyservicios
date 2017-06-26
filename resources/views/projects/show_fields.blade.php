@@ -135,7 +135,7 @@
                                                 </tr>
                                               </thead>
                                               <tbody>
-                                                @foreach($alumnoProyectos as $ap)
+                                                @foreach($alumnoproyectos as $ap)
                                                  @if($project->id == $ap->id_proyecto) 
                                                 <tr>
                                                   <td>{!! $ap->rut !!}</td>
@@ -184,7 +184,7 @@
                                                 </tr>
                                               </thead>
                                               <tbody>
-                                                @foreach($alumnoProyectos as $ap)
+                                                @foreach($alumnoproyectos as $ap)
                                                  @if($project->id == $ap->id_proyecto) 
                                                 <tr>
                                                   <td>{!! $ap->rut !!}</td>
@@ -306,7 +306,7 @@ function remove() {
         $.ajax({
         type: "DELETE",
         headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-        url: '../alumnoProyectos/'+rut2,
+        url: '../alumnoproyectos/'+rut2,
         data: misDatos2,
         dataType:"json",
         cache : false,
@@ -333,7 +333,7 @@ function remove2(button) {
         $.ajax({
         type: "DELETE",
         headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-        url: '../alumnoProyectos/'+rut2,
+        url: '../alumnoproyectos/'+rut2,
         data: misDatos2,
         dataType:"json",
         cache : false,
@@ -361,7 +361,7 @@ function addToCartTable(cells) {
         $.ajax({
         type: "POST",
         headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-        url: '../alumnoProyectos/store',
+        url: '../alumnoproyectos/store',
         data: misDatos,
         dataType:"json",
         cache : false,
