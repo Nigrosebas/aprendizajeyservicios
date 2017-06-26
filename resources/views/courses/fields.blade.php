@@ -6,8 +6,14 @@
 
 <!-- Id Faculty Field -->
 <div class="form-group col-sm-6 col-lg-4">
-    {!! Form::label('nombre_carrera', 'Nombre Carrera:') !!}
-	{!! Form::text('nombre_carrera', null, ['class' => 'form-control']) !!}
+    {!! Form::label('id_faculty', 'Id Faculty:') !!}
+	{!! Form::text('id_faculty', null, ['class' => 'form-control']) !!}
+</div>
+
+<!-- Name Course Field -->
+<div class="form-group col-sm-6 col-lg-4">
+    {!! Form::label('name_course', 'Name Course:') !!}
+	{!! Form::text('name_course', null, ['class' => 'form-control']) !!}
 </div>
 
 

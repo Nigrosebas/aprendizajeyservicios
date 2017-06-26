@@ -154,10 +154,11 @@
         </a>
       </div>
     </div>
-
-
-
   @endif
+
+
+
+
   @if(Auth::user()->rol=='Profesor') 
 
     <div class="panel panel-default">
@@ -222,7 +223,7 @@
         </div>
       </div>
       <a href="#demo" class="btn btn-info" data-toggle="collapse">Crear Profesor</a>
-      <a href="#demo2" class="btn btn-info" data-toggle="collapse">Añadir Cursos</a>
+      <!--<a href="#demo2" class="btn btn-info" data-toggle="collapse">Añadir Cursos</a>-->
       <a href="#demo3" class="btn btn-info" data-toggle="collapse">Ver Cursos</a><br></br><br></br>
       <div id="demo" class="collapse">
         <div class="panel panel-default">
