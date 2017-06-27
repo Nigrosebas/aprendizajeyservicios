@@ -219,10 +219,51 @@
           <h1 class="panel-title" align="center">Bienvenido a la Interfaz de Coordinador de A+S</h1>
         </div>
         <div class="panel-body">
-          Hola {!! Auth::user()->coordinador->nombre !!}, su cuenta está configurada con la {!! Auth::user()->coordinador->universidad->nombre_u !!}
+          <h2>Hola {!! Auth::user()->coordinador->nombre !!}, su cuenta está configurada con la {!! Auth::user()->coordinador->universidad->nombre_u !!}<br>
+          Recuerde Añadir las Facultades, Cursos, Profesores y Alumnos al sistema.</h2>
         </div>
       </div>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h1 class="panel-title" align="center">Facultades</h1>
+        </div>
+        <div class="panel-body">
+          <div class="row">
+            <a class="btn btn-primary pull-right" style="margin-top: 25px" href="{!! route('faculties.create') !!}">Añadir Nueva Facultad</a>
+          </div>
+          <br>
+          <div class="row">
+            @if($faculties->isEmpty())
+                <div class="well text-center">No Faculties found.</div>
+            @else
+                @include('faculties.table')
+            @endif
+          </div>
+          @include('common.paginate', ['records' => $faculties])
+        </div>
+      </div>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h1 class="panel-title" align="center">Cursos</h1>
+        </div>
+        <div class="panel-body">
+          <div class="row">
+            <a class="btn btn-primary pull-right" style="margin-top: 25px" href="{!! route('courses.create') !!}">Añadir Nuevo Curso</a>
+          </div>
+          <br>
+           <div class="row">
+            @if($courses->isEmpty())
+                <div class="well text-center">No Courses found.</div>
+            @else
+                @include('courses.table')
+            @endif
+        </div>
+        @include('common.paginate', ['records' => $courses])
+        </div>
+      </div>
+
       <a href="#demo" class="btn btn-info" data-toggle="collapse">Crear Profesor</a>
+
       <!--<a href="#demo2" class="btn btn-info" data-toggle="collapse">Añadir Cursos</a>-->
       <a href="#demo3" class="btn btn-info" data-toggle="collapse">Ver Cursos</a><br></br><br></br>
       <div id="demo" class="collapse">

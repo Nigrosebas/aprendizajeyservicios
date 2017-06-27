@@ -1,15 +1,13 @@
 <table class="table">
     <thead>
-    <th>Id University</th>
-			<th>Id Faculty</th>
-			<th>Name Course</th>
+			<th>Facultad</th>
+			<th>Nombre del Curso</th>
     <th width="50px">Action</th>
     </thead>
     <tbody>
     @foreach($courses as $course)
         <tr>
-            <td>{!! $course->id_university !!}</td>
-			<td>{!! $course->id_faculty !!}</td>
+			<td>{!! $course->name_faculty !!}</td>
 			<td>{!! $course->name_course !!}</td>
             <td>
                 <a href="{!! route('courses.edit', [$course->id]) !!}"><i class="glyphicon glyphicon-edit"></i></a>

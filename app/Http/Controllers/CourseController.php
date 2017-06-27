@@ -4,19 +4,25 @@ use App\Http\Requests;
 use App\Http\Requests\CreateCourseRequest;
 use App\Http\Requests\UpdateCourseRequest;
 use App\Libraries\Repositories\CourseRepository;
+use App\Libraries\Repositories\FacultyRepository;
 use Flash;
 use Mitul\Controller\AppBaseController as AppBaseController;
 use Response;
+use Auth;
+use App\Models\Faculty;
 
 class CourseController extends AppBaseController
 {
 
 	/** @var  CourseRepository */
 	private $courseRepository;
+	private $facultyRepository;
 
-	function __construct(CourseRepository $courseRepo)
+	function __construct(CourseRepository $courseRepo,FacultyRepository $facultyRepo)
 	{
 		$this->courseRepository = $courseRepo;
+		$this->facultyRepository = $facultyRepo;
+
 	}
 
 	/**
@@ -39,7 +45,17 @@ class CourseController extends AppBaseController
 	 */
 	public function create()
 	{
-		return view('courses.create');
+		if(Auth::check()){
+            if(Auth::user()->rol=='Coordinador') {
+            	$id = Auth::user()->Coordinador->id_university;
+            	$facultades = Faculty::where('id_university','=',$id)->lists('nombre_facultad', 'id');
+
+            }
+        }
+        else{
+        $facultades = Faculty::lists('nombre_facultad', 'id');}
+		return view('courses.create')
+		->with('facultades',$facultades);
 	}
 
 	/**
@@ -52,12 +68,15 @@ class CourseController extends AppBaseController
 	public function store(CreateCourseRequest $request)
 	{
 		$input = $request->all();
+		$id = $input['id_faculty'];
+		$nombredelafacultad = Faculty::where('id','=',$id)->select('nombre_facultad')->first();
+		$input['name_faculty'] = $nombredelafacultad['nombre_facultad'];
 
 		$course = $this->courseRepository->create($input);
 
 		Flash::success('Course saved successfully.');
 
-		return redirect(route('courses.index'));
+		return redirect(route('inicio.index'));
 	}
 
 	/**
@@ -118,14 +137,14 @@ class CourseController extends AppBaseController
 		{
 			Flash::error('Course not found');
 
-			return redirect(route('courses.index'));
+			return redirect(route('inicio.index'));
 		}
 
 		$this->courseRepository->updateRich($request->all(), $id);
 
 		Flash::success('Course updated successfully.');
 
-		return redirect(route('courses.index'));
+		return redirect(route('inicio.index'));
 	}
 
 	/**
@@ -150,6 +169,6 @@ class CourseController extends AppBaseController
 
 		Flash::success('Course deleted successfully.');
 
-		return redirect(route('courses.index'));
+		return redirect(route('inicio.index'));
 	}
 }

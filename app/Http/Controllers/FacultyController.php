@@ -57,7 +57,7 @@ class FacultyController extends AppBaseController
 
 		Flash::success('Faculty saved successfully.');
 
-		return redirect(route('faculties.index'));
+		return redirect(route('inicio.index'));
 	}
 
 	/**
@@ -125,7 +125,7 @@ class FacultyController extends AppBaseController
 
 		Flash::success('Faculty updated successfully.');
 
-		return redirect(route('faculties.index'));
+		return redirect(route('inicio.index'));
 	}
 
 	/**
@@ -150,6 +150,6 @@ class FacultyController extends AppBaseController
 
 		Flash::success('Faculty deleted successfully.');
 
-		return redirect(route('faculties.index'));
+		return redirect(route('inicio.index'));
 	}
 }

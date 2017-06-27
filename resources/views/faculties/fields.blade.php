@@ -1,8 +1,6 @@
 <!-- Id University Field -->
-<div class="form-group col-sm-6 col-lg-4">
-    {!! Form::label('id_university', 'Id University:') !!}
-	{!! Form::text('id_university', null, ['class' => 'form-control']) !!}
-</div>
+
+	{!! Form::hidden('id_university', Auth::user()->coordinador->universidad->id, ['class' => 'form-control']) !!}
 
 <!-- Nombre Facultad Field -->
 <div class="form-group col-sm-6 col-lg-4">
@@ -13,5 +11,5 @@
 
 <!-- Submit Field -->
 <div class="form-group col-sm-12">
-    {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
+    {!! Form::submit('Guardar', ['class' => 'btn btn-primary']) !!}
 </div>

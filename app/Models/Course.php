@@ -11,7 +11,8 @@ class Course extends Model
 	public $fillable = [
 	    "id_university",
 		"id_faculty",
-		"name_course"
+		"name_course",
+		"name_faculty"
 	];
 
     /**
@@ -26,6 +27,7 @@ class Course extends Model
     ];
 
 	public static $rules = [
+	"name_course" => 'required',
 	    
 	];
 

@@ -24,6 +24,7 @@ class Faculty extends Model
     ];
 
 	public static $rules = [
+    "nombre_facultad" => 'required',
 	    
 	];
 

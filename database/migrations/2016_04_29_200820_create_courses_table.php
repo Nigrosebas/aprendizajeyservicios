@@ -18,6 +18,7 @@ class CreateCoursesTable extends Migration
 			$table->increments('id');
 			$table->integer('id_university');
 			$table->integer('id_faculty')->unsigned();
+			$table->string('name_faculty');
 			$table->string('name_course');
 			$table->foreign('id_faculty')->references('id')->on('faculties');
 			$table->timestamps();
