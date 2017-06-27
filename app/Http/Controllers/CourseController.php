@@ -5,6 +5,7 @@ use App\Http\Requests\CreateCourseRequest;
 use App\Http\Requests\UpdateCourseRequest;
 use App\Libraries\Repositories\CourseRepository;
 use App\Libraries\Repositories\FacultyRepository;
+use App\Libraries\Repositories\CourseallRepository;
 use Flash;
 use Mitul\Controller\AppBaseController as AppBaseController;
 use Response;
@@ -17,11 +18,13 @@ class CourseController extends AppBaseController
 	/** @var  CourseRepository */
 	private $courseRepository;
 	private $facultyRepository;
+	private $courseallRepository;
 
-	function __construct(CourseRepository $courseRepo,FacultyRepository $facultyRepo)
+	function __construct(CourseRepository $courseRepo,FacultyRepository $facultyRepo,CourseallRepository $courseallRepo)
 	{
 		$this->courseRepository = $courseRepo;
 		$this->facultyRepository = $facultyRepo;
+		$this->courseallRepository = $courseallRepo;
 
 	}
 
@@ -54,8 +57,10 @@ class CourseController extends AppBaseController
         }
         else{
         $facultades = Faculty::lists('nombre_facultad', 'id');}
+        $coursealls = $this->courseallRepository->paginate(1800);
 		return view('courses.create')
-		->with('facultades',$facultades);
+		->with('facultades',$facultades)
+		->with('coursealls', $coursealls);
 	}
 
 	/**

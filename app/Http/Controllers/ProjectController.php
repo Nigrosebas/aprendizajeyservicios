@@ -17,6 +17,7 @@ use App\Models\AlumnoProyecto;
 use Mitul\Controller\AppBaseController as AppBaseController;
 use Response;
 use DB;
+use Auth;
 
 class ProjectController extends AppBaseController
 {
@@ -72,7 +73,14 @@ class ProjectController extends AppBaseController
 
 	public function create()
 	{
-		$cursos = Course::lists('name_course', 'id');
+		if(Auth::check()){
+            if(Auth::user()->rol=='Profesor') {
+            	$id = Auth::user()->Profesor->id_university;
+            	$cursos = Course::where('id_university','=',$id)->lists('name_course', 'id');
+
+            }
+        }
+		//$cursos = Course::lists('name_course', 'id');
 		return view('projects.create')->with('cursos',$cursos);
 	}
 

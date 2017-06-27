@@ -291,7 +291,7 @@
             @else
                 @include('courses.table')
             @endif
-            @include('common.paginate', ['records' => $courses])
+            <!--@include('common.paginate', ['records' => $courses])-->
           </div>
         </div>
       </div>
