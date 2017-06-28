@@ -17,7 +17,7 @@
     background: #999;
 }
 </style>
-    <div id="wrapper">
+    <div id="wrapper" class="toggled">
 
         <!-- Sidebar -->
         <div id="sidebar-wrapper" style="background:#fff" ">
@@ -66,7 +66,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
-                    <a href="#menu-toggle" class="btn btn-default" id="menu-toggle"><span class="glyphicon glyphicon-menu-hamburger"></span>  Menú de Fases</a><br></br>
+                    <!--<a href="#menu-toggle" class="btn btn-default" id="menu-toggle"><span class="glyphicon glyphicon-menu-hamburger"></span>  Menú de Fases</a><br></br>-->
 
                         <div class="panel panel-primary">
                             <div class="panel-heading">
@@ -153,6 +153,7 @@
                             </div>
                         </div>
                         <div class="row">
+                            @if(Auth::user()->rol=='Profesor') 
                             <div class="col-sm-6">
                                 <div class="panel panel-primary">
                                     <div class="panel-heading">
@@ -169,6 +170,7 @@
                                     </div>
                                 </div>
                             </div>
+                            @endif
                             <div class="col-sm-6">
                                 <div class="panel panel-primary">
                                     <div class="panel-heading">
@@ -204,6 +206,43 @@
                 </div>
             </div>
         </div>
+
+            <div class="panel panel-default">
+      <div class="panel-heading">
+         <h1 class="panel-title" align="center">Grafico Motivación</h1>
+      </div>
+      <div class="panel-body">
+      <div id="container1" style="width:100%; height:400px;">
+        <script type="text/javascript">
+            $(function () { 
+              var myChart = Highcharts.chart('container1', {
+                  chart: {
+                      type: 'bar'
+                  },
+                  title: {
+                      text: 'Encuesta Motivacional'
+                  },
+                  xAxis: {
+                      categories: ['Pregunta 1', 'Pregunta 2','Pregunta 3','Pregunta 4']
+                  },
+                  yAxis: {
+                      title: {
+                          text: 'Comparación'
+                      }
+                  },
+                  series: [{
+                      name: 'SI',
+                      data: [1, 5,3,4]
+                  }, {
+                      name: 'NO',
+                      data: [1, 30,5,6]
+                  }]
+              });
+          });
+        </script>
+      </div>
+     </div>
+    </div>
         <legend id="motivacion">Motivación</legend>
         @if(Auth::user()->rol=='Alumno') 
         <div class="panel-group">
@@ -215,6 +254,7 @@
                 </div>
                 <div id="collapse1" class="panel-collapse collapse">
                     <div class="panel-body">
+
                         @include('common.errors')
 
                         {!! Form::open(['route' => 'motivations.store']) !!}
@@ -254,20 +294,6 @@
     $('body').scrollspy({ target: '#spy', offset:80});
 
     /*Smooth link animation*/
-    $('a[href*=#]:not([href=#])').click(function() {
-        if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') || location.hostname == this.hostname) {
-
-            var target = $(this.hash);
-            target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
-            if (target.length) {
-                $('html,body').animate({
-                    scrollTop: target.offset().top
-                }, 1000);
-                return false;
-            }
-        }
-    });
-
 
 
 function add(button) {
