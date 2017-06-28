@@ -8,6 +8,7 @@ use App\Libraries\Repositories\AlumnoProyectoRepository;
 use App\Libraries\Repositories\CourseRepository;
 use App\Libraries\Repositories\AlumnoRepository;
 use App\Libraries\Repositories\ProfesorRepository;
+use App\Libraries\Repositories\MotivationRepository;
 use Flash;
 use App\Models\Project;
 use App\Models\Profesor;
@@ -25,16 +26,18 @@ class ProjectController extends AppBaseController
 	/** @var  ProjectRepository */
 	private $projectRepository;
 	private $courseRepository;
+	private $motivationRepository;
 	private $profesorRepository;
 
 
-	function __construct(ProjectRepository $projectRepo,CourseRepository $courseRepo,AlumnoRepository $alumnoRepo,AlumnoProyectoRepository $alumnoProyectoRepo,ProfesorRepository $profesorRepo)
+	function __construct(ProjectRepository $projectRepo,CourseRepository $courseRepo,AlumnoRepository $alumnoRepo,AlumnoProyectoRepository $alumnoProyectoRepo,ProfesorRepository $profesorRepo,MotivationRepository $motivationRepo)
 	{
 		$this->projectRepository = $projectRepo;
 		$this->courseRepository = $courseRepo;
 		$this->alumnoRepository = $alumnoRepo;
 		$this->alumnoProyectoRepository = $alumnoProyectoRepo;
 		$this->profesorRepository = $profesorRepo;
+		$this->motivationRepository = $motivationRepo;
 	}
 
 	/**
@@ -97,6 +100,10 @@ class ProjectController extends AppBaseController
 		$input['evaluaciones'] = implode(', ', $input['evaluaciones']);
 
 		$project = $this->projectRepository->create($input);
+		/*$obtenerid = Project::orderBy('updated_at', 'desc')->first();
+		$input2['id_project'] = $obtenerid['id'];
+
+		$motivation = $this->motivationRepository->create($input2);*/
 
 		Flash::success('Project saved successfully.');
 

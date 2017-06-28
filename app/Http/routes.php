@@ -265,3 +265,11 @@ Route::get('coursealls/{id}/delete', [
     'as' => 'coursealls.delete',
     'uses' => 'CourseallController@destroy',
 ]);
+
+
+Route::resource('motivations', 'MotivationController');
+
+Route::get('motivations/{id}/delete', [
+    'as' => 'motivations.delete',
+    'uses' => 'MotivationController@destroy',
+]);

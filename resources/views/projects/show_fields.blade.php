@@ -207,46 +207,26 @@
         <legend id="motivacion">Motivación</legend>
         @if(Auth::user()->rol=='Alumno') 
         <div class="panel-group">
-          <div class="panel panel-default">
-            <div class="panel-heading">
-              <h4 class="panel-title">
-                <a data-toggle="collapse" href="#collapse1">Formulario de la Etapa Motivación</a>
-              </h4>
-            </div>
-            <div id="collapse1" class="panel-collapse collapse">
-              <div class="panel-body">
-                <div class="panel-body">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">Nombre del Proyecto</div>
-                        <div class="panel-body">{!! Form::text('project_name', null, ['class' => 'form-control']) !!}</div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                    <a data-toggle="collapse" href="#collapse1">Formulario de la Etapa Motivación</a>
+                    </h4>
+                </div>
+                <div id="collapse1" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        @include('common.errors')
+
+                        {!! Form::open(['route' => 'motivations.store']) !!}
+
+                            @include('motivations.fields')
+
+                        {!! Form::close() !!}
+
                     </div>
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <div class="panel panel-default">
-                                <div class="panel-heading">¿Cuál es el nivel de complejidad del Proyecto ?</div>
-                                <div class="panel-body">
-                                    <div class="form-group col-sm-6 col-lg-4">
-                                    {!! Form::select('complejidad',['Baja' => 'Baja', 'Media' => 'Media', 'Alta' => 'Alta'], null,['class' => 'form-control']) !!}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="panel panel-default">
-                                <div class="panel-heading">¿Cuál será la duración del Proyecto?</div>
-                                <div class="panel-body">
-                                    <div class="form-group col-sm-6 col-lg-4">
-                                    {!! Form::select('duracion',['1 Semestre' => '1 Semestre', '2 Semestres' => '2 Semestres'], null,['class' => 'form-control']) !!}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-              </div>
+                </div>
             </div>
-          </div>
         </div>
-    </div>
     @endif
     @if(Auth::user()->rol=='Profesor') 
 
