@@ -56,6 +56,11 @@
                 <li>
                     <a href="#">Evaluación</a>
                 </li>
+                @if(Auth::user()->rol=='Profesor') 
+                <li class="sidebar-brand">
+                    <a href="#graficos" data-scroll>Graficos</a>
+                </li>
+                @endif
             </ul>
         </div>
         <!-- /#sidebar-wrapper -->
@@ -207,66 +212,32 @@
             </div>
         </div>
 
-            <div class="panel panel-default">
-      <div class="panel-heading">
-         <h1 class="panel-title" align="center">Grafico Motivación</h1>
-      </div>
-      <div class="panel-body">
-      <div id="container1" style="width:100%; height:400px;">
-        <script type="text/javascript">
-            $(function () { 
-              var myChart = Highcharts.chart('container1', {
-                  chart: {
-                      type: 'bar'
-                  },
-                  title: {
-                      text: 'Encuesta Motivacional'
-                  },
-                  xAxis: {
-                      categories: ['Pregunta 1', 'Pregunta 2','Pregunta 3','Pregunta 4']
-                  },
-                  yAxis: {
-                      title: {
-                          text: 'Comparación'
-                      }
-                  },
-                  series: [{
-                      name: 'SI',
-                      data: [1, 5,3,4]
-                  }, {
-                      name: 'NO',
-                      data: [1, 30,5,6]
-                  }]
-              });
-          });
-        </script>
-      </div>
-     </div>
-    </div>
         <legend id="motivacion">Motivación</legend>
-        @if(Auth::user()->rol=='Alumno') 
-        <div class="panel-group">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title">
-                    <a data-toggle="collapse" href="#collapse1">Formulario de la Etapa Motivación</a>
-                    </h4>
-                </div>
-                <div id="collapse1" class="panel-collapse collapse">
-                    <div class="panel-body">
+        @if(Auth::user()->rol=='Alumno')
+            @if($consultarrut->isEmpty())
+            <div class="panel-group">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                        <a data-toggle="collapse" href="#collapse1">Formulario de la Etapa Motivación</a>
+                        </h4>
+                    </div>
+                    <div id="collapse1" class="panel-collapse collapse">
+                        <div class="panel-body">
 
-                        @include('common.errors')
+                            @include('common.errors')
 
-                        {!! Form::open(['route' => 'motivations.store']) !!}
+                            {!! Form::open(['route' => 'motivations.store']) !!}
 
-                            @include('motivations.fields')
+                                @include('motivations.fields')
 
-                        {!! Form::close() !!}
+                            {!! Form::close() !!}
 
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+            @endif
     @endif
     @if(Auth::user()->rol=='Profesor') 
 
@@ -275,6 +246,45 @@
     <legend id="planificacion">Planificación</legend>
     <legend id="ejecucion">Ejecución</legend>
     <legend id="cierre">Cierre</legend>
+    <legend id="graficos">Gráficos</legend>
+    @if(Auth::user()->rol=='Profesor')
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h1 class="panel-title" align="center">Grafico Motivación</h1>
+            </div>
+            <div class="panel-body">
+                <div id="container1" style="width:100%; height:400px;">
+                    <script type="text/javascript">
+                        $(function () { 
+                            var myChart = Highcharts.chart('container1', {
+                              chart: {
+                                  type: 'bar'
+                              },
+                              title: {
+                                  text: 'Encuesta Motivacional'
+                              },
+                              xAxis: {
+                                  categories: ['Pregunta 1', 'Pregunta 2','Pregunta 3','Pregunta 4']
+                              },
+                              yAxis: {
+                                  title: {
+                                      text: 'Comparación'
+                                  }
+                              },
+                              series: [{
+                                  name: 'SI',
+                                  data: [{!!$countpregunta1si !!},{!!$countpregunta2si !!},{!!$countpregunta3si !!},{!!$countpregunta4si !!}]
+                              }, {
+                                  name: 'NO',
+                                  data: [{!!$countpregunta1no !!},{!!$countpregunta2no !!},{!!$countpregunta3no !!},{!!$countpregunta4no !!}]
+                              }]
+                            });
+                        });
+                    </script>
+                </div>
+            </div>
+        </div>
+    @endif
 
         <!-- /#page-content-wrapper -->
 

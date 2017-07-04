@@ -11,6 +11,7 @@ use App\Libraries\Repositories\ProfesorRepository;
 use App\Libraries\Repositories\MotivationRepository;
 use Flash;
 use App\Models\Project;
+use App\Models\Motivation;
 use App\Models\Profesor;
 use App\Models\Course;
 use App\Models\Alumno;
@@ -122,23 +123,53 @@ class ProjectController extends AppBaseController
 		$project = $this->projectRepository->find($id);
 		$alumnos = $this->alumnoRepository->paginate(100);
 		$profesors = $this->profesorRepository->paginate(100);
-		$results = DB::table('alumnoproyectos')->select('id','nombre','rut','id_proyecto')
-		->get();
+		$results = DB::table('alumnoproyectos')->select('id','nombre','rut','id_proyecto')->get();
+		if(Auth::check()){
+				$rut = Auth::user()->rut;
+            	$consultarrut = Motivation::where('rut','=',$rut)->select('rut')->get();
+            if(Auth::user()->rol=='Profesor') {
+            	$countpregunta1si = Motivation::where('pregunta1','=','Si')->count();
+            	$countpregunta2si = Motivation::where('pregunta2','=','Si')->count();
+            	$countpregunta3si = Motivation::where('pregunta3','=','Si')->count();
+            	$countpregunta4si = Motivation::where('pregunta4','=','Si')->count();
+            	$countpregunta1no = Motivation::where('pregunta1','=','No')->count();
+            	$countpregunta2no = Motivation::where('pregunta2','=','No')->count();
+            	$countpregunta3no = Motivation::where('pregunta3','=','No')->count();
+            	$countpregunta4no = Motivation::where('pregunta4','=','No')->count();
+            }
+        
+			if(empty($project))
+			{
+				Flash::error('Project not found');
 
-		//dd($results);
+				return redirect(route('projects.index'));
+			}
 
-		if(empty($project))
-		{
-			Flash::error('Project not found');
-
-			return redirect(route('projects.index'));
+			if(Auth::user()->rol=='Profesor') {
+				return view('projects.show')
+				->with('countpregunta1si', $countpregunta1si)
+				->with('countpregunta2si', $countpregunta2si)
+				->with('countpregunta3si', $countpregunta3si)
+				->with('countpregunta4si', $countpregunta4si)
+				->with('countpregunta1no', $countpregunta1no)
+				->with('countpregunta2no', $countpregunta2no)
+				->with('countpregunta3no', $countpregunta3no)
+				->with('countpregunta4no', $countpregunta4no)
+				->with('project', $project)
+				->with('alumnos', $alumnos)
+				->with('profesors',$profesors)
+				->with('consultarrut',$consultarrut)
+				->with('alumnoproyectos', $results);
+				}
+			else{
+				return view('projects.show')
+				->with('project', $project)
+				->with('alumnos', $alumnos)
+				->with('profesors',$profesors)
+				->with('consultarrut',$consultarrut)
+				->with('alumnoproyectos', $results);
+			}
 		}
-
-		return view('projects.show')
-		->with('project', $project)
-		->with('alumnos', $alumnos)
-		->with('profesors',$profesors)
-		->with('alumnoproyectos', $results);
 	}
 
 	/**
