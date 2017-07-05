@@ -57,35 +57,6 @@
          <h1 class="panel-title" align="center">Noticias</h1>
       </div>
       <div class="panel-body">
-      <div id="container1" style="width:100%; height:400px;">
-        <script type="text/javascript">
-            $(function () { 
-              var myChart = Highcharts.chart('container1', {
-                  chart: {
-                      type: 'bar'
-                  },
-                  title: {
-                      text: 'Cursos de A+S'
-                  },
-                  xAxis: {
-                      categories: ['UCM', 'PUC']
-                  },
-                  yAxis: {
-                      title: {
-                          text: 'Comparación'
-                      }
-                  },
-                  series: [{
-                      name: '2004',
-                      data: [1, 5]
-                  }, {
-                      name: '2017',
-                      data: [1, 30]
-                  }]
-              });
-          });
-        </script>
-      </div>
      </div>
     </div>
 
