@@ -57,7 +57,7 @@ class MotivationController extends AppBaseController
 
 		Flash::success('Motivation saved successfully.');
 
-		return redirect(route('motivations.index'));
+		return redirect(route('inicio.index'));
 	}
 
 	/**
@@ -118,14 +118,14 @@ class MotivationController extends AppBaseController
 		{
 			Flash::error('Motivation not found');
 
-			return redirect(route('motivations.index'));
+			return redirect(route('inicio.index'));
 		}
 
 		$this->motivationRepository->updateRich($request->all(), $id);
 
 		Flash::success('Motivation updated successfully.');
 
-		return redirect(route('motivations.index'));
+		return redirect(route('inicio.index'));
 	}
 
 	/**
@@ -143,13 +143,13 @@ class MotivationController extends AppBaseController
 		{
 			Flash::error('Motivation not found');
 
-			return redirect(route('motivations.index'));
+			return redirect(route('inicio.index'));
 		}
 
 		$this->motivationRepository->delete($id);
 
 		Flash::success('Motivation deleted successfully.');
 
-		return redirect(route('motivations.index'));
+		return redirect(route('inicio.index'));
 	}
 }

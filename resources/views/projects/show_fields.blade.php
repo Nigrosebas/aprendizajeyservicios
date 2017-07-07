@@ -57,7 +57,7 @@
                     <a href="#">Registro, Sistematización y Com.</a>
                 </li>
                 <li>
-                    <a href="#">Evaluación</a>
+                    <a href="#evaluacion">Evaluación</a>
                 </li>
                 @if(Auth::user()->rol=='Profesor') 
                 <li class="sidebar-brand">
@@ -205,6 +205,23 @@
                     </div>
                 </div>
             </div>
+            @else <div class="panel-group">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                        <a data-toggle="collapse" href="#collapse1">Formulario</a>
+                        </h4>
+                    </div>
+                    <div id="collapse1" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            Formulario ya respondido el {!!($created->created_at)!!}
+                            <br>
+                            Si desea modificarlo click acá.
+                            <a href="{!! route('motivations.edit', [$created->id]) !!}"><i class="glyphicon glyphicon-edit"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
             @endif
     @endif
     @if(Auth::user()->rol=='Profesor') 
@@ -214,6 +231,22 @@
     <legend id="planificacion">Planificación</legend>
     <legend id="ejecucion">Ejecución</legend>
     <legend id="cierre">Cierre</legend>
+    <legend id="evaluacion">Evaluación</legend>
+        <div class="panel-group">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                    <a data-toggle="collapse" href="#collapse2">Formulario de la Etapa Evaluación</a>
+                    </h4>
+                </div>
+                <div id="collapse2" class="panel-collapse collapse">
+                    <div class="panel-body">
+                    Formulario o Encuesta ocupada por (Caire,2015)
+
+                    </div>
+                </div>
+            </div>
+        </div>
     <legend id="graficos">Gráficos</legend>
     @if(Auth::user()->rol=='Profesor')
         <div class="panel panel-default">

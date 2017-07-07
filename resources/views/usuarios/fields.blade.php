@@ -17,7 +17,7 @@
 		@if(Auth::user()->rol=='Administrador')
 			<div class="form-group col-sm-6">
 		    	{!! Form::label('rol', 'Rol:') !!}
-				{!! Form::select('rol',['Profesor' => 'Profesor','Coordinador' => 'Coordinador'],null,['class' => 'form-control']) !!}
+				{!! Form::select('rol',['Coordinador' => 'Coordinador'],null,['class' => 'form-control']) !!}
 			</div>
 			<div class="form-group col-sm-6">
     			{!! Form::Label('id_university', 'Universidad :') !!}

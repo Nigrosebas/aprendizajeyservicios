@@ -18,7 +18,7 @@
         <div class="item active">
           <img src={!! asset('package/images/slide1.png')!!} alt="1">
           <div class="carousel-caption">
-            <h3>Logo de la Universidad + Nombre de Proyecto</h3>
+            <h3>Aprendizaje por Servicio</h3>
             <p>Descripción Importante</p>
           </div>
         </div>
@@ -26,16 +26,16 @@
         <div class="item">
           <img src={!! asset('package/images/slide2.png')!!} alt="2"> 
           <div class="carousel-caption">
-            <h3>Alumnos trabajando en Empresas</h3>
-            <p>o algo similar</p>
+            <h3>Banco de Proyectos A+S</h3>
+            <p></p>
           </div>
         </div>
 
         <div class="item">
           <img src={!! asset('package/images/slide3.png')!!} alt="3">
           <div class="carousel-caption">
-            <h3>¿Buscas trabajar con alumnos de la UCM?</h3>
-            <p>Descripción Importante</p>
+            <h3>Colabora con Nosotros!</h3>
+            <p>Con tu información todos vamos mejorando.</p>
           </div>
         </div>
       </div>
@@ -57,7 +57,6 @@
          <h1 class="panel-title" align="center">Noticias</h1>
       </div>
       <div class="panel-body" align="center">
-      Actualmente hay {!! $countproyectos!!} Proyectos.
      </div>
     </div>
 
@@ -125,6 +124,16 @@
           Añadir Coordinadores de Carrera
         </a>
       </div>
+    </div>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+         <h1 class="panel-title" align="center">Noticias</h1>
+      </div>
+      <div class="panel-body" align="center">
+      Actualmente hay {!! $countproyectos!!} Proyectos Vigentes.
+      <br> De los cuales X están terminados.
+
+     </div>
     </div>
   @endif
 
@@ -329,7 +338,64 @@
               </div>
             </div>
           </div><br>
-          <div class="container">
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h1 class="panel-title" align="center">Graficos</h1>
+                </div>
+                <div class="panel-body">
+                  <div id="container3" style="width:100%; height:400px;">
+                    <script type="text/javascript">
+                        $(function () { 
+                            var myChart3 = Highcharts.chart('container3', {
+
+    title: {
+        text: 'Proyectos en la {!! Auth::user()->coordinador->universidad->nombre_u !!}, 2017-2024'
+    },
+
+    subtitle: {
+        text: ''
+    },
+
+    yAxis: {
+        title: {
+            text: 'Numero de Proyectos por Año'
+        }
+    },
+    legend: {
+        layout: 'vertical',
+        align: 'right',
+        verticalAlign: 'middle'
+    },
+
+    plotOptions: {
+        series: {
+            pointStart: 2017
+        }
+    },
+
+    series: [{
+        name: 'Facultad 1',
+        data: [1, 2, 4, 8, 6, 10, 13, 25]
+    }, {
+        name: 'Facultad 2',
+        data: [1, 3, 3, 3, 8, 11, 12, 15]
+    }, {
+        name: 'Facultad 3',
+        data: [1, 5, 2, 8, 7, 12, 5, 15]
+    }, {
+        name: 'Facultad 4',
+        data: [1, 7, 8, 7, 3, 11, 10, 15]
+    }, {
+        name: 'Facultad 5',
+        data: [1, 5, 5, 6, 2, 9, 13, 15]
+    }]
+
+});
+                        });
+                    </script>
+                </div>
+                </div>      
+              </div>
 
   @endif
 

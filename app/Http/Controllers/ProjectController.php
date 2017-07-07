@@ -136,6 +136,7 @@ class ProjectController extends AppBaseController
 		if(Auth::check()){
 				$rut = Auth::user()->rut;
             	$consultarrut = Motivation::where('rut','=',$rut)->select('rut')->get();
+            	$created = Motivation::where('rut','=',$rut)->first();
             if(Auth::user()->rol=='Profesor') {
             	$countpregunta1si = Motivation::where('pregunta1','=','Si')->count();
             	$countpregunta2si = Motivation::where('pregunta2','=','Si')->count();
@@ -174,6 +175,7 @@ class ProjectController extends AppBaseController
 			else{
 				return view('projects.show')
 				->with('cursos', $cursos)
+				->with('created',$created)
 				->with('project', $project)
 				->with('alumnos', $alumnos)
 				->with('profesors',$profesors)
