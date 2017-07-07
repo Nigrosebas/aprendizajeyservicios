@@ -57,7 +57,7 @@ class ProfesorController extends AppBaseController
 
 		Flash::success('Profesor saved successfully.');
 
-		return redirect(route('profesors.index'));
+		return redirect(route('inicio.index'));
 	}
 
 	/**
@@ -75,7 +75,7 @@ class ProfesorController extends AppBaseController
 		{
 			Flash::error('Profesor not found');
 
-			return redirect(route('profesors.index'));
+			return redirect(route('inicio.index'));
 		}
 
 		return view('profesors.show')->with('profesor', $profesor);
@@ -118,14 +118,14 @@ class ProfesorController extends AppBaseController
 		{
 			Flash::error('Profesor not found');
 
-			return redirect(route('profesors.index'));
+			return redirect(route('inicio.index'));
 		}
 
 		$this->profesorRepository->updateRich($request->all(), $id);
 
 		Flash::success('Profesor updated successfully.');
 
-		return redirect(route('profesors.index'));
+		return redirect(route('inicio.index'));
 	}
 
 	/**
@@ -150,6 +150,6 @@ class ProfesorController extends AppBaseController
 
 		Flash::success('Profesor deleted successfully.');
 
-		return redirect(route('profesors.index'));
+		return redirect(route('inicio.index'));
 	}
 }

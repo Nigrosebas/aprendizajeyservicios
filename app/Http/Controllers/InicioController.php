@@ -48,6 +48,7 @@ class InicioController extends AppBaseController
         $courses = $this->courseRepository->paginate(20);
         $projects = $this->projectRepository->paginate(20);
         $faculties = $this->facultyRepository->paginate(10);
+        $countproyectos = Project::count();
         if(Auth::check()){
             if(Auth::user()->rol=='Coordinador') {
             $id = Auth::user()->Coordinador->id_university;
@@ -59,6 +60,8 @@ class InicioController extends AppBaseController
         ->with('courses', $courses)
         ->with('projects', $projects)
         ->with('alumnoproyectos', $alumnoproyectos)
+        ->with('countproyectos',$countproyectos)
         ->with('faculties', $faculties);
+
     }
 }

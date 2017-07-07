@@ -98,7 +98,14 @@ class ProjectController extends AppBaseController
 	public function store(CreateProjectRequest $request)
 	{
 		$input = $request->all();
+		if(empty($input['evaluaciones']))
+		{
+
+		}
+		else
+		{
 		$input['evaluaciones'] = implode(', ', $input['evaluaciones']);
+		}
 
 		$project = $this->projectRepository->create($input);
 		/*$obtenerid = Project::orderBy('updated_at', 'desc')->first();
@@ -123,7 +130,9 @@ class ProjectController extends AppBaseController
 		$project = $this->projectRepository->find($id);
 		$alumnos = $this->alumnoRepository->paginate(100);
 		$profesors = $this->profesorRepository->paginate(100);
-		$results = DB::table('alumnoproyectos')->select('id','nombre','rut','id_proyecto')->get();
+		$results = DB::table('alumnoproyectos')->select('id','nombre','rut','rol','id_proyecto')->get();
+		$cursos = Course::select('id','name_course')->get();
+
 		if(Auth::check()){
 				$rut = Auth::user()->rut;
             	$consultarrut = Motivation::where('rut','=',$rut)->select('rut')->get();
@@ -156,6 +165,7 @@ class ProjectController extends AppBaseController
 				->with('countpregunta3no', $countpregunta3no)
 				->with('countpregunta4no', $countpregunta4no)
 				->with('project', $project)
+				->with('cursos', $cursos)
 				->with('alumnos', $alumnos)
 				->with('profesors',$profesors)
 				->with('consultarrut',$consultarrut)
@@ -163,6 +173,7 @@ class ProjectController extends AppBaseController
 				}
 			else{
 				return view('projects.show')
+				->with('cursos', $cursos)
 				->with('project', $project)
 				->with('alumnos', $alumnos)
 				->with('profesors',$profesors)
@@ -182,6 +193,13 @@ class ProjectController extends AppBaseController
 	public function edit($id)
 	{
 		$project = $this->projectRepository->find($id);
+		if(Auth::check()){
+            if(Auth::user()->rol=='Profesor') {
+            	$id = Auth::user()->Profesor->id_university;
+            	$cursos = Course::where('id_university','=',$id)->lists('name_course', 'id');
+
+            }
+        }
 
 		if(empty($project))
 		{
@@ -190,7 +208,9 @@ class ProjectController extends AppBaseController
 			return redirect(route('projects.index'));
 		}
 
-		return view('projects.edit')->with('project', $project);
+		return view('projects.edit')
+		->with('project', $project)
+		->with('cursos',$cursos);
 	}
 
 	/**

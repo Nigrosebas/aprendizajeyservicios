@@ -23,6 +23,9 @@
         <div id="sidebar-wrapper" style="background:#fff" ">
             <ul class="sidebar-nav">
                 <li class="sidebar-brand">
+                    <a href="#personal" data-scroll>Equipo</a>
+                </li>
+                <li class="sidebar-brand">
                     <a>
                         Etapas
                     </a>
@@ -72,34 +75,31 @@
                 <div class="row">
                     <div class="col-lg-12">
                     <!--<a href="#menu-toggle" class="btn btn-default" id="menu-toggle"><span class="glyphicon glyphicon-menu-hamburger"></span>  Menú de Fases</a><br></br>-->
-
                         <div class="panel panel-primary">
                             <div class="panel-heading">
-                                <h1 class="panel-title" align="center">Proyecto {!! $project->project_name!!}</h1>
+                                <h1 class="panel-title" align="center">Proyecto </h1>
                             </div>
                             <div class="panel-body">
                                 <!-- Id Profesor Field -->
                                 <div class="form-group col-sm-4">
-                                    {!! Form::label('id_profesor', 'Id Profesor:') !!}
-                                    <p>{!! $project->id_profesor !!}</p>
-                                </div>
-
-                                <!-- Id University Field -->
-                                <div class="form-group col-sm-4">
-                                    {!! Form::label('id_university', 'Id University:') !!}
-                                    <p>{!! $project->id_university !!}</p>
+                                    {!! Form::label('project_name', 'Nombre del Proyecto:') !!}
+                                    {!! $project->project_name!!}
                                 </div>
 
                                 <!-- Year Field -->
                                 <div class="form-group col-sm-4">
-                                    {!! Form::label('year', 'Year:') !!}
+                                    {!! Form::label('year', 'Año:') !!}
                                     <p>{!! $project->year !!}</p>
                                 </div>
 
                                 <!-- Id Course Field -->
                                 <div class="form-group col-sm-4">
-                                    {!! Form::label('id_course', 'Id Course:') !!}
-                                    <p>{!! $project->id_course !!}</p>
+                                {!! Form::label('course', 'Curso:') !!}</br>
+                                    @foreach($cursos as $c)
+                                        @if ($c->id == $project->id_course)
+                                         {!! $c->name_course!!}
+                                        @endif
+                                    @endforeach
                                 </div>
                             </div>
                             <div class="panel-footer">Cierre del Proyecto
@@ -107,8 +107,9 @@
                             </div>
                         </div>
                         <div class="row">
+                        <legend id="personal"></legend>
                         @if(Auth::user()->rol=='Profesor') 
-                            <div class="col-sm-6">
+                            <div class="col-sm-12">
                                 <div class="panel panel-primary">
                                     <div class="panel-heading">
                                         <h1 class="panel-title" align="center">Alumnos</h1>
@@ -124,8 +125,24 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="col-sm-12">
+                                <div class="panel panel-primary">
+                                    <div class="panel-heading">
+                                        <h1 class="panel-title" align="center">Profesores</h1>
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            @if($profesors->isEmpty())
+                                            <div class="well text-center">No existen Profesores aún.</div>
+                                                @else
+                                                @include('profesors.table2')
+                                            @endif
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         @endif
-                            <div class="col-sm-6">
+                            <div class="col-sm-12">
                                 <div class="panel panel-primary">
                                     <div class="panel-heading">
                                         <h1 class="panel-title" align="center">Alumnos en el Proyecto</h1>
@@ -137,6 +154,7 @@
                                                 <tr>
                                                   <th>Rut</th>
                                                   <th>Nombre</th>
+                                                  <th>Rol</th>
                                                 </tr>
                                               </thead>
                                               <tbody>
@@ -145,57 +163,7 @@
                                                 <tr>
                                                   <td>{!! $ap->rut !!}</td>
                                                   <td>{!! $ap->nombre !!}</td>
-                                                  @if(Auth::user()->rol=='Profesor')
-                                                  <td><button onclick="remove2(this)"  class="btn btn-xs btn-danger">Descartar</button> </td>@endif
-                                                </tr>
-                                                @endif
-                                            @endforeach
-                                              </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            @if(Auth::user()->rol=='Profesor') 
-                            <div class="col-sm-6">
-                                <div class="panel panel-primary">
-                                    <div class="panel-heading">
-                                        <h1 class="panel-title" align="center">Profesores</h1>
-                                    </div>
-                                    <div class="panel-body">
-                                        <div class="row">
-                                            @if($profesors->isEmpty())
-                                            <div class="well text-center">No existen Profesores aún.</div>
-                                                @else
-                                                @include('profesors.table')
-                                            @endif
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            @endif
-                            <div class="col-sm-6">
-                                <div class="panel panel-primary">
-                                    <div class="panel-heading">
-                                        <h1 class="panel-title" align="center">Profesores en el Proyecto</h1>
-                                    </div>
-                                    <div class="panel-body">
-                                        <div class="table-responsive">
-                                            <table id="target" class="table table-bordered table-hover">
-                                              <thead>
-                                                <tr>
-                                                  <th>Rut</th>
-                                                  <th>Nombre</th>
-                                                </tr>
-                                              </thead>
-                                              <tbody>
-                                                @foreach($alumnoproyectos as $ap)
-                                                 @if($project->id == $ap->id_proyecto) 
-                                                <tr>
-                                                  <td>{!! $ap->rut !!}</td>
-                                                  <td>{!! $ap->nombre !!}</td>
+                                                  <td>{!! $ap->rol !!}</td>
                                                   @if(Auth::user()->rol=='Profesor')
                                                   <td><button onclick="remove2(this)"  class="btn btn-xs btn-danger">Descartar</button> </td>@endif
                                                 </tr>
@@ -311,6 +279,11 @@ function add(button) {
   var cells = row.querySelectorAll('td:not(:last-of-type)');
   addToCartTable(cells);
 }
+function add2(button) {
+    var row = button.parentNode.parentNode;
+  var cells = row.querySelectorAll('td:not(:last-of-type)');
+  addToCartTable2(cells);
+}
 
 function remove() {
     var row = this.parentNode.parentNode;
@@ -369,8 +342,10 @@ function remove2(button) {
 function addToCartTable(cells) {
    var rut = cells[0].innerText;
    var nombre = cells[1].innerText;
+   var rol = cells[3].innerText;
    var misDatos = {
     "rut" : rut,
+    "rol" : rol,
     "nombre" : nombre,
     "id_proyecto" : {!!$project->id!!},
     "nombre_proyecto" : "{!!$project->project_name!!}", }
@@ -395,6 +370,46 @@ function addToCartTable(cells) {
    
    newRow.appendChild(createCell(rut));
    newRow.appendChild(createCell(nombre));
+   newRow.appendChild(createCell(rol));
+
+   var cellRemoveBtn = createCell();
+   cellRemoveBtn.appendChild(createRemoveBtn())
+   newRow.appendChild(cellRemoveBtn);
+   
+   document.querySelector('#target tbody').appendChild(newRow);
+}
+function addToCartTable2(cells) {
+   var rut = cells[0].innerText;
+   var nombre = cells[1].innerText;
+   var rol = cells[3].innerText;
+   var misDatos = {
+    "rut" : rut,
+    "rol" : rol,
+    "nombre" : nombre,
+    "id_proyecto" : {!!$project->id!!},
+    "nombre_proyecto" : "{!!$project->project_name!!}", }
+        $.ajax({
+        type: "POST",
+        headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+        url: '../alumnoproyectos/store',
+        data: misDatos,
+        dataType:"json",
+        cache : false,
+        success: function(data){
+            if(data.success == true){
+            }
+        }
+        , error: function (xhr, ajaxOptions, thrownError) {
+        },
+
+    });
+
+   
+   var newRow = document.createElement('tr');
+   
+   newRow.appendChild(createCell(rut));
+   newRow.appendChild(createCell(nombre));
+   newRow.appendChild(createCell(rol));
 
    var cellRemoveBtn = createCell();
    cellRemoveBtn.appendChild(createRemoveBtn())

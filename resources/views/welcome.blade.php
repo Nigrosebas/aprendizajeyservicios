@@ -56,7 +56,8 @@
       <div class="panel-heading">
          <h1 class="panel-title" align="center">Noticias</h1>
       </div>
-      <div class="panel-body">
+      <div class="panel-body" align="center">
+      Actualmente hay {!! $countproyectos!!} Proyectos.
      </div>
     </div>
 
@@ -138,6 +139,8 @@
       </div>
       <div class="panel-body">
         Hola {!!  Auth::user()->profesor->nombre !!}, su cuenta está configurada con la {!! Auth::user()->profesor->universidad->nombre_u !!}
+        <br>
+        Si el curso en el cual usted desea generar el proyecto no se encuentra, contactese con su Coordinador de A+S.
       </div>
     </div>
     <div class="row">
