@@ -9,9 +9,17 @@ use App\Libraries\Repositories\CourseRepository;
 use App\Libraries\Repositories\AlumnoRepository;
 use App\Libraries\Repositories\ProfesorRepository;
 use App\Libraries\Repositories\MotivationRepository;
+use App\Libraries\Repositories\DiagnosticRepository;
+use App\Libraries\Repositories\PlanificationRepository;
+use App\Libraries\Repositories\ExecutionRepository;
+use App\Libraries\Repositories\ClosingRepository;
 use Flash;
 use App\Models\Project;
 use App\Models\Motivation;
+use App\Models\Diagnostic;
+use App\Models\Planification;
+use App\Models\Execution;
+use App\Models\Closing;
 use App\Models\Profesor;
 use App\Models\Course;
 use App\Models\Alumno;
@@ -31,7 +39,7 @@ class ProjectController extends AppBaseController
 	private $profesorRepository;
 
 
-	function __construct(ProjectRepository $projectRepo,CourseRepository $courseRepo,AlumnoRepository $alumnoRepo,AlumnoProyectoRepository $alumnoProyectoRepo,ProfesorRepository $profesorRepo,MotivationRepository $motivationRepo)
+	function __construct(ProjectRepository $projectRepo,CourseRepository $courseRepo,AlumnoRepository $alumnoRepo,AlumnoProyectoRepository $alumnoProyectoRepo,ProfesorRepository $profesorRepo,MotivationRepository $motivationRepo,DiagnosticRepository $diagnosticRepo,PlanificationRepository $planificationRepo,ExecutionRepository $executionRepo,ClosingRepository $closingRepo)
 	{
 		$this->projectRepository = $projectRepo;
 		$this->courseRepository = $courseRepo;
@@ -39,6 +47,10 @@ class ProjectController extends AppBaseController
 		$this->alumnoProyectoRepository = $alumnoProyectoRepo;
 		$this->profesorRepository = $profesorRepo;
 		$this->motivationRepository = $motivationRepo;
+		$this->diagnosticRepository = $diagnosticRepo;
+		$this->planificationRepository = $planificationRepo;
+		$this->executionRepository = $executionRepo;
+		$this->closingRepository = $closingRepo;
 	}
 
 	/**
@@ -135,17 +147,51 @@ class ProjectController extends AppBaseController
 
 		if(Auth::check()){
 				$rut = Auth::user()->rut;
-            	$consultarrut = Motivation::where('rut','=',$rut)->select('rut')->get();
-            	$created = Motivation::where('rut','=',$rut)->first();
+            	$consultarrutmotivation = Motivation::where('rut','=',$rut)->select('rut')->get();
+            	$consultarrutdiagnostic = Diagnostic::where('rut','=',$rut)->select('rut')->get();
+            	$consultarrutplanification = Planification::where('rut','=',$rut)->select('rut')->get();
+            	$consultarrutexecution = Execution::where('rut','=',$rut)->select('rut')->get();
+            	$consultarrutclosing = Closing::where('rut','=',$rut)->select('rut')->get();
+            	$createdmoti = Motivation::where('rut','=',$rut)->first();
+            	$createddiag = Diagnostic::where('rut','=',$rut)->first();
+            	$createdplan = Planification::where('rut','=',$rut)->first();
+            	$createdexec = Execution::where('rut','=',$rut)->first();
+            	$createdclos = Closing::where('rut','=',$rut)->first();
             if(Auth::user()->rol=='Profesor') {
-            	$countpregunta1si = Motivation::where('pregunta1','=','Si')->count();
-            	$countpregunta2si = Motivation::where('pregunta2','=','Si')->count();
-            	$countpregunta3si = Motivation::where('pregunta3','=','Si')->count();
-            	$countpregunta4si = Motivation::where('pregunta4','=','Si')->count();
-            	$countpregunta1no = Motivation::where('pregunta1','=','No')->count();
-            	$countpregunta2no = Motivation::where('pregunta2','=','No')->count();
-            	$countpregunta3no = Motivation::where('pregunta3','=','No')->count();
-            	$countpregunta4no = Motivation::where('pregunta4','=','No')->count();
+            	$countmotpregunta1si = Motivation::where('pregunta1','=','Si')->count();
+            	$countmotpregunta2si = Motivation::where('pregunta2','=','Si')->count();
+            	$countmotpregunta3si = Motivation::where('pregunta3','=','Si')->count();
+            	$countmotpregunta4si = Motivation::where('pregunta4','=','Si')->count();
+            	$countmotpregunta1no = Motivation::where('pregunta1','=','No')->count();
+            	$countmotpregunta2no = Motivation::where('pregunta2','=','No')->count();
+            	$countmotpregunta3no = Motivation::where('pregunta3','=','No')->count();
+            	$countmotpregunta4no = Motivation::where('pregunta4','=','No')->count();
+
+            	$countdiagpregunta1si = Diagnostic::where('pregunta1','=','Si')->count();
+            	$countdiagpregunta2si = Diagnostic::where('pregunta2','=','Si')->count();
+            	$countdiagpregunta3si = Diagnostic::where('pregunta3','=','Si')->count();
+            	$countdiagpregunta1no = Diagnostic::where('pregunta1','=','No')->count();
+            	$countdiagpregunta2no = Diagnostic::where('pregunta2','=','No')->count();
+            	$countdiagpregunta3no = Diagnostic::where('pregunta3','=','No')->count();
+
+            	$countplanpregunta1si = Planification::where('pregunta1','=','Si')->count();
+            	$countplanpregunta2si = Planification::where('pregunta2','=','Si')->count();
+            	$countplanpregunta1no = Planification::where('pregunta1','=','No')->count();
+            	$countplanpregunta2no = Planification::where('pregunta2','=','No')->count();
+
+            	$countexepregunta1si = Execution::where('pregunta1','=','Si')->count();
+            	$countexepregunta2si = Execution::where('pregunta2','=','Si')->count();
+            	$countexepregunta3si = Execution::where('pregunta3','=','Si')->count();
+            	$countexepregunta1no = Execution::where('pregunta1','=','No')->count();
+            	$countexepregunta2no = Execution::where('pregunta2','=','No')->count();
+            	$countexepregunta3no = Execution::where('pregunta3','=','No')->count();
+
+            	$countclopregunta1si = Closing::where('pregunta1','=','Si')->count();
+            	$countclopregunta2si = Closing::where('pregunta2','=','Si')->count();
+            	$countclopregunta3si = Closing::where('pregunta3','=','Si')->count();
+            	$countclopregunta1no = Closing::where('pregunta1','=','No')->count();
+            	$countclopregunta2no = Closing::where('pregunta2','=','No')->count();
+            	$countclopregunta3no = Closing::where('pregunta3','=','No')->count();
             }
         
 			if(empty($project))
@@ -157,29 +203,64 @@ class ProjectController extends AppBaseController
 
 			if(Auth::user()->rol=='Profesor') {
 				return view('projects.show')
-				->with('countpregunta1si', $countpregunta1si)
-				->with('countpregunta2si', $countpregunta2si)
-				->with('countpregunta3si', $countpregunta3si)
-				->with('countpregunta4si', $countpregunta4si)
-				->with('countpregunta1no', $countpregunta1no)
-				->with('countpregunta2no', $countpregunta2no)
-				->with('countpregunta3no', $countpregunta3no)
-				->with('countpregunta4no', $countpregunta4no)
+				->with('countmotpregunta1si', $countmotpregunta1si)
+				->with('countmotpregunta2si', $countmotpregunta2si)
+				->with('countmotpregunta3si', $countmotpregunta3si)
+				->with('countmotpregunta4si', $countmotpregunta4si)
+				->with('countmotpregunta1no', $countmotpregunta1no)
+				->with('countmotpregunta2no', $countmotpregunta2no)
+				->with('countmotpregunta3no', $countmotpregunta3no)
+				->with('countmotpregunta4no', $countmotpregunta4no)
+				->with('countdiagpregunta1si', $countdiagpregunta1si)
+				->with('countdiagpregunta2si', $countdiagpregunta2si)
+				->with('countdiagpregunta3si', $countdiagpregunta3si)
+				->with('countdiagpregunta1no', $countdiagpregunta1no)
+				->with('countdiagpregunta2no', $countdiagpregunta2no)
+				->with('countdiagpregunta3si', $countdiagpregunta3no)
+				->with('countplanpregunta1si', $countplanpregunta1si)
+				->with('countplanpregunta2si', $countplanpregunta2si)
+				->with('countplanpregunta1no', $countplanpregunta1no)
+				->with('countplanpregunta2no', $countplanpregunta2no)
+				->with('countexepregunta1si', $countexepregunta1si)
+				->with('countexepregunta2si', $countexepregunta2si)
+				->with('countexepregunta3si', $countexepregunta3si)
+				->with('countexepregunta1no', $countexepregunta1no)
+				->with('countexepregunta2no', $countexepregunta2no)
+				->with('countexepregunta3no', $countexepregunta3no)
+				->with('countclopregunta1si', $countclopregunta1si)
+				->with('countclopregunta2si', $countclopregunta2si)
+				->with('countclopregunta3si', $countclopregunta3si)
+				->with('countclopregunta1no', $countclopregunta1no)
+				->with('countclopregunta2no', $countclopregunta2no)
+				->with('countclopregunta3no', $countclopregunta3no)
+
 				->with('project', $project)
 				->with('cursos', $cursos)
 				->with('alumnos', $alumnos)
 				->with('profesors',$profesors)
-				->with('consultarrut',$consultarrut)
+				->with('consultarrutmotivation',$consultarrutmotivation)
+				->with('consultarrutdiagnostic',$consultarrutdiagnostic)
+				->with('consultarrutplanification',$consultarrutplanification)
+				->with('consultarrutexecution',$consultarrutexecution)
+				->with('consultarrutclosing',$consultarrutclosing)
 				->with('alumnoproyectos', $results);
 				}
 			else{
 				return view('projects.show')
 				->with('cursos', $cursos)
-				->with('created',$created)
+				->with('createdmoti',$createdmoti)
+				->with('createddiag',$createddiag)
+				->with('createdplan',$createdplan)
+				->with('createdexec',$createdexec)
+				->with('createdclos',$createdclos)
 				->with('project', $project)
 				->with('alumnos', $alumnos)
 				->with('profesors',$profesors)
-				->with('consultarrut',$consultarrut)
+				->with('consultarrutmotivation',$consultarrutmotivation)
+				->with('consultarrutdiagnostic',$consultarrutdiagnostic)
+				->with('consultarrutplanification',$consultarrutplanification)
+				->with('consultarrutexecution',$consultarrutexecution)
+				->with('consultarrutclosing',$consultarrutclosing)
 				->with('alumnoproyectos', $results);
 			}
 		}

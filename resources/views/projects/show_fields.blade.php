@@ -198,7 +198,7 @@ $(function () {
 
         <legend id="motivacion">Motivación</legend>
         @if(Auth::user()->rol=='Alumno')
-            @if($consultarrut->isEmpty())
+            @if($consultarrutmotivation->isEmpty())
             <div class="panel-group">
                 <div class="panel panel-default">
                     <div class="panel-heading">
@@ -230,10 +230,10 @@ $(function () {
                     </div>
                     <div id="collapse1" class="panel-collapse collapse">
                         <div class="panel-body">
-                            Formulario ya respondido el {!!($created->created_at)!!}
+                            Formulario ya respondido el {!!($createdmoti->created_at)!!}
                             <br>
                             Si desea modificarlo click acá.
-                            <a href="{!! route('motivations.edit', [$created->id]) !!}"><i class="glyphicon glyphicon-edit"></i></a>
+                            <a href="{!! route('motivations.edit', [$createdmoti->id]) !!}"><i class="glyphicon glyphicon-edit"></i></a>
                         </div>
                     </div>
                 </div>
@@ -243,7 +243,53 @@ $(function () {
     @if(Auth::user()->rol=='Profesor') 
 
     @endif
-    <legend id="diagnostico">Diagnostico</legend>
+        <legend id="diagnostico">Diagnostico</legend>
+        @if(Auth::user()->rol=='Alumno')
+            @if($consultarrutdiagnostic->isEmpty())
+            <div class="panel-group">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                        <a data-toggle="collapse" href="#collapsediag">Formulario de la Etapa Diagnostico</a>
+                        </h4>
+                    </div>
+                    <div id="collapsediag" class="panel-collapse collapse">
+                        <div class="panel-body">
+
+                            @include('common.errors')
+
+                            {!! Form::open(['route' => 'diagnostics.store']) !!}
+
+                                @include('diagnostics.fields')
+
+                            {!! Form::close() !!}
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @else <div class="panel-group">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                        <a data-toggle="collapse" href="#collapsediag2">Formulario</a>
+                        </h4>
+                    </div>
+                    <div id="collapsediag2" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            Formulario ya respondido el {!!($createddiag->created_at)!!}
+                            <br>
+                            Si desea modificarlo click acá.
+                            <a href="{!! route('diagnostics.edit', [$createddiag->id]) !!}"><i class="glyphicon glyphicon-edit"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @endif
+    @endif
+    @if(Auth::user()->rol=='Profesor') 
+
+    @endif
     <legend id="planificacion">Planificación</legend>
     <legend id="ejecucion">Ejecución</legend>
     <legend id="cierre">Cierre</legend>
@@ -294,10 +340,10 @@ $(function () {
                                   },
                                   series: [{
                                       name: 'SI',
-                                      data: [{!!$countpregunta1si !!},{!!$countpregunta2si !!},{!!$countpregunta3si !!},{!!$countpregunta4si !!}]
+                                      data: [{!!$countmotpregunta1si !!},{!!$countmotpregunta2si !!},{!!$countmotpregunta3si !!},{!!$countmotpregunta4si !!}]
                                   }, {
                                       name: 'NO',
-                                      data: [{!!$countpregunta1no !!},{!!$countpregunta2no !!},{!!$countpregunta3no !!},{!!$countpregunta4no !!}]
+                                      data: [{!!$countmotpregunta1no !!},{!!$countmotpregunta2no !!},{!!$countmotpregunta3no !!},{!!$countmotpregunta4no !!}]
                                   }]
                                 });
                             });

@@ -273,3 +273,35 @@ Route::get('motivations/{id}/delete', [
     'as' => 'motivations.delete',
     'uses' => 'MotivationController@destroy',
 ]);
+
+
+Route::resource('diagnostics', 'DiagnosticController');
+
+Route::get('diagnostics/{id}/delete', [
+    'as' => 'diagnostics.delete',
+    'uses' => 'DiagnosticController@destroy',
+]);
+
+
+Route::resource('planifications', 'PlanificationController');
+
+Route::get('planifications/{id}/delete', [
+    'as' => 'planifications.delete',
+    'uses' => 'PlanificationController@destroy',
+]);
+
+
+Route::resource('executions', 'ExecutionController');
+
+Route::get('executions/{id}/delete', [
+    'as' => 'executions.delete',
+    'uses' => 'ExecutionController@destroy',
+]);
+
+
+Route::resource('closings', 'ClosingController');
+
+Route::get('closings/{id}/delete', [
+    'as' => 'closings.delete',
+    'uses' => 'ClosingController@destroy',
+]);
