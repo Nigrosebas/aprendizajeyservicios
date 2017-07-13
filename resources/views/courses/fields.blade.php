@@ -18,14 +18,15 @@
 </div>
 </br>
 </br>
-        <div class="row">
-            @if($coursealls->isEmpty())
-                <div class="well text-center">No Coursealls found.</div>
-            @else
-                @include('coursealls.table')
-            @endif
-        </div>
-        @include('common.paginate', ['records' => $coursealls])
+    <div class="row">
+        @if($coursealls->isEmpty())
+            <div class="well text-center">No Coursealls found.</div>
+        @else
+            @include('coursealls.table')
+        @endif
+    </div>
+    @include('common.paginate', ['records' => $coursealls])
+
 <script type="text/javascript">
 
     function añadir(button) {
@@ -35,3 +36,27 @@
     document.getElementById("name_course").value = rut;
 }
 </script>
+<style type="text/css">
+.pace {
+  -webkit-pointer-events: none;
+  pointer-events: none;
+
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+}
+
+.pace-inactive {
+  display: none;
+}
+
+.pace .pace-progress {
+  background: #ed2e12;
+  position: fixed;
+  z-index: 2000;
+  top: 0;
+  right: 100%;
+  width: 100%;
+  height: 2px;
+}
+</style>

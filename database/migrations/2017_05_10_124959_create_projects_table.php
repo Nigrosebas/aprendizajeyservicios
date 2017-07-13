@@ -24,6 +24,13 @@ class CreateProjectsTable extends Migration
 			$table->string('duracion');
 			$table->string('evaluaciones');
 			$table->string('otras_evaluaciones');
+			$table->integer('porcentaje');
+			$table->integer('objalcanzados');
+			$table->text('resumen');
+			$table->text('objetivos');
+			$table->text('resultados');
+			$table->text('conclusion');
+			$table->string('estado');
 			$table->integer('id_course')->unsigned();
 			$table->integer('alumnos_table')->unsigned();
 			$table->foreign('id_university')->references('id')->on('universities');

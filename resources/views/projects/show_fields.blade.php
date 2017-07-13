@@ -16,19 +16,34 @@
     color: #000;
     background: #999;
 }
+.sidebar-nav > .sidebar-brand {
+    height: 45px;
+    font-size: 15px;
+    line-height: 40px;
+}
+.sidebar-nav li {
+    text-indent: 15px;
+    line-height: 35px;
+}
+
 </style>
+<script type="text/javascript">
+$(function () {
+  $('[data-toggle="popover"]').popover()
+})    
+</script>
+
     <div id="wrapper" class="toggled">
 
         <!-- Sidebar -->
-        <div id="sidebar-wrapper" style="background:#fff" ">
-            <ul class="sidebar-nav">
+        <div id="sidebar-wrapper" style="background:#fff" >
+
+            <ul class="sidebar-nav" style="position: absolute">
                 <li class="sidebar-brand">
                     <a href="#personal" data-scroll>Equipo</a>
                 </li>
                 <li class="sidebar-brand">
-                    <a>
-                        Etapas
-                    </a>
+                    <a>Etapas y Procesos</a>
                 </li>
                 <li>
                     <a href="#motivacion" data-scroll>Motivación</a>
@@ -46,9 +61,7 @@
                     <a href="#cierre" data-scroll>Cierre</a>
                 </li>
                 <li class="sidebar-brand">
-                    <a>
-                        Procesos Transversales
-                    </a>
+                    <a>Procesos Transversales</a>
                 </li>
                 <li>
                     <a href="#">Reflexión</a>
@@ -62,6 +75,9 @@
                 @if(Auth::user()->rol=='Profesor') 
                 <li class="sidebar-brand">
                     <a href="#graficos" data-scroll>Graficos</a>
+                </li>
+                <li class="sidebar-brand">
+                    <a href="#cierreproyecto" data-scroll>Cerrar Proyecto</a>
                 </li>
                 @endif
             </ul>
@@ -242,49 +258,127 @@
                 <div id="collapse2" class="panel-collapse collapse">
                     <div class="panel-body">
                     Formulario o Encuesta ocupada por (Caire,2015)
+                    Esperando respuesta para poder ocuparla.
 
                     </div>
                 </div>
             </div>
         </div>
-    <legend id="graficos">Gráficos</legend>
     @if(Auth::user()->rol=='Profesor')
+    <legend id="graficos">Gráficos</legend>
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h1 class="panel-title" align="center">Grafico Motivación</h1>
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" href="#collapsemotivacion">Grafico Motivacion</a>
+                </h4>
             </div>
-            <div class="panel-body">
-                <div id="container1" style="width:100%; height:400px;">
-                    <script type="text/javascript">
-                        $(function () { 
-                            var myChart = Highcharts.chart('container1', {
-                              chart: {
-                                  type: 'bar'
-                              },
-                              title: {
-                                  text: 'Encuesta Motivacional'
-                              },
-                              xAxis: {
-                                  categories: ['Pregunta 1', 'Pregunta 2','Pregunta 3','Pregunta 4']
-                              },
-                              yAxis: {
+            <div id="collapsemotivacion" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <div id="container1" style="width:100%; height:400px;">
+                        <script type="text/javascript">
+                            $(function () { 
+                                var myChart = Highcharts.chart('container1', {
+                                  chart: {
+                                      type: 'bar'
+                                  },
                                   title: {
-                                      text: 'Comparación'
-                                  }
-                              },
-                              series: [{
-                                  name: 'SI',
-                                  data: [{!!$countpregunta1si !!},{!!$countpregunta2si !!},{!!$countpregunta3si !!},{!!$countpregunta4si !!}]
-                              }, {
-                                  name: 'NO',
-                                  data: [{!!$countpregunta1no !!},{!!$countpregunta2no !!},{!!$countpregunta3no !!},{!!$countpregunta4no !!}]
-                              }]
+                                      text: 'Encuesta Motivacional'
+                                  },
+                                  xAxis: {
+                                      categories: ['Pregunta 1', 'Pregunta 2','Pregunta 3','Pregunta 4']
+                                  },
+                                  yAxis: {
+                                      title: {
+                                          text: 'Comparación'
+                                      }
+                                  },
+                                  series: [{
+                                      name: 'SI',
+                                      data: [{!!$countpregunta1si !!},{!!$countpregunta2si !!},{!!$countpregunta3si !!},{!!$countpregunta4si !!}]
+                                  }, {
+                                      name: 'NO',
+                                      data: [{!!$countpregunta1no !!},{!!$countpregunta2no !!},{!!$countpregunta3no !!},{!!$countpregunta4no !!}]
+                                  }]
+                                });
                             });
-                        });
-                    </script>
+                        </script>
+                    </div>
                 </div>
             </div>
         </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" href="#collapsediagnostico">Grafico Diagnostico</a>
+                </h4>
+            </div>
+            <div id="collapsediagnostico" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <div id="container1" style="width:100%; height:400px;">
+                        <script type="text/javascript">
+                        </script>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <legend id="cierreproyecto">Cierre Proyecto</legend>
+    <div class="panel-group">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" href="#collapsecierre">Finalización de Proyecto</a>
+                </h4>
+            </div>
+            {!! Form::model($project, ['route' => ['projects.update', $project->id], 'method' => 'patch']) !!}
+            <div id="collapsecierre" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <div class="form-group col-sm-6 col-lg-12">
+                    Con finalidad de poder mostrar éste proyecto y que sirva de ayuda, se debe completar lo siguiente:
+                    </div>
+                    <div class="form-group col-sm-6 col-lg-12">
+                        {!! Form::label('porcentaje', 'El Proyecto según su parecer alcanzó un :') !!}<br></br>
+                       <b>0%   </b>         <input id="ex1" data-slider-id='ex1Slider' type="text" data-slider-min="0" data-slider-max="100" data-slider-step="5" data-slider-value=""/><b> 100% </b><span id="ex6CurrentSliderValLabel">Porcentaje :<span id="mostrar1">0%</span></span>
+                        {!! Form::hidden('porcentaje',0, ['class' => 'form-control','id' => 'porcentaje']) !!}
+                    </div>
+                    <div class="form-group col-sm-6 col-lg-12">
+                        {!! Form::label('resumen', 'Los objetivos planteados en un comienzo versus los objetivos alcanzados, ¿en que porcentaje concuerdan?') !!}<br></br>
+                       <b>0%   </b>         <input id="ex2" data-slider-id='ex1Slider' type="text" data-slider-min="0" data-slider-max="100" data-slider-step="5" data-slider-value=""/><b> 100% </b><span id="ex6CurrentSliderValLabel">Porcentaje : <span id="mostrar2">0%</span></span>
+                    {!! Form::hidden('objalcanzados',0, ['class' => 'form-control','id' => 'objalcanzados']) !!}
+
+                    </div>
+
+
+                    <div class="form-group col-sm-6 col-lg-12">
+                        {!! Form::label('resumen', 'Resumen:') !!}
+                        <a align"right" type="button" class="btn btn-info btn-sm" data-container="body" data-toggle="popover" data-placement="right" data-content="Vivamus sagittis lacus vel augue laoreet rutrum 
+                        faucibus."><span class="glyphicon glyphicon-info-sign"></span></a>
+
+                        {!! Form::textarea('resumen', null, ['class' => 'form-control','rows' => 8, 'cols' => 150,'style' => 'resize: none']) !!}
+                    </div>
+                    <div class="form-group col-sm-6 col-lg-12">
+                        {!! Form::label('objetivos', 'Objetivos A+S:') !!}
+                        {!! Form::textarea('objetivos', null, ['class' => 'form-control','rows' => 8, 'cols' => 150,'style' => 'resize: none']) !!}
+                    </div>
+                    <div class="form-group col-sm-6 col-lg-12">
+                        {!! Form::label('resultados', 'Resultados:') !!}
+                        {!! Form::textarea('resultados', null, ['class' => 'form-control','rows' => 8, 'cols' => 150,'style' => 'resize: none']) !!}
+                    </div>
+                    <div class="form-group col-sm-6 col-lg-12">
+                        {!! Form::label('conclusion', 'Conclusiones y Reflexiones:') !!}
+                        {!! Form::textarea('conclusion', null, ['class' => 'form-control','rows' => 8, 'cols' => 150,'style' => 'resize: none']) !!}
+                    </div>
+
+
+                    <!-- Submit Field -->
+                    <div class="form-group col-sm-12">
+                        {!! Form::submit('Guardar y Cerrar Proyecto', ['class' => 'btn btn-primary']) !!}
+
+                    </div>
+                </div>
+            </div>
+            {!! Form::close() !!}
+        </div>
+    </div>
     @endif
 
         <!-- /#page-content-wrapper -->
@@ -475,6 +569,26 @@ function createCell(text) {
   }
   return td;
 }
+
+// Without JQuery
+var slider = new Slider('#ex1', {
+    formatter: function(value) {
+        return  value+'%';
+    }
+});
+slider.on("slide", function(sliderValue) {
+    document.getElementById("porcentaje").value = sliderValue;
+    document.getElementById("mostrar1").textContent = sliderValue + '%';
+});
+var slider = new Slider('#ex2', {
+    formatter: function(value) {
+        return  value+'%';
+    }
+});
+slider.on("slide", function(sliderValue) {
+    document.getElementById("objalcanzados").value = sliderValue;
+    document.getElementById("mostrar2").textContent = sliderValue + '%';
+});
 </script>
 
 <style type="text/css">
@@ -487,7 +601,8 @@ function createCell(text) {
   /* para centrado vertical de contenido */
   vertical-align: middle;
 }
-
+#ex1Slider .slider-selection {
+    background: #BABABA;
+}
 
 </style>
-

@@ -10,11 +10,13 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="{!! asset('package/fileinput.min.css')!!}" >
-
+<!--<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">-->
 <script src="{!! asset('package/fileinput.min.js')!!}"</script>
 <!-- Latest compiled and minified JavaScript -->
 
-
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.1.1/dropzone.js"></script>
+<link rel="stylesheet" href="{!! asset('package/dropzone.css')!!}">
+<link rel="stylesheet" href="{!! asset('package/basic.css')!!}">
 <link rel="stylesheet" href="{!! asset('package/css.css')!!}">
 <link rel="stylesheet" href="{!! asset('package/fontawesome/css/font-awesome.css')!!}" >
 <link rel="stylesheet" href="{!! asset('package/fontawesome/css/font-awesome.min.css')!!}" >
@@ -23,8 +25,23 @@
 <script src="http://code.highcharts.com/highcharts.js"></script>
 <script src="https://code.highcharts.com/modules/exporting.js"></script>
 <script src="https://code.highcharts.com/highcharts-more.js"></script>
-<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 <script src="{!! asset('package/es.js')!!}"></script>
+<script src="{!! asset('package/pace.js')!!}"></script>
+<script src="{!! asset('package/pace.min.js')!!}"></script>
+
+<link rel="stylesheet" href="{!! asset('package/nouislider.css')!!}">
+<link rel="stylesheet" href="{!! asset('package/nouislider.min.css')!!}">
+<script src="{!! asset('package/nouislider.js')!!}"></script>
+<script src="{!! asset('package/nouislider.min.js')!!}"></script>
+
+
+<!--<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/9.8.1/bootstrap-slider.js"></script>-->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/9.8.1/bootstrap-slider.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/9.8.1/css/bootstrap-slider.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/9.8.1/css/bootstrap-slider.css">
+
+
+
 <style type="text/css">
 body {
   padding-top: 70px;
