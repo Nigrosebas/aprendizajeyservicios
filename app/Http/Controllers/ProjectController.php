@@ -87,6 +87,39 @@ class ProjectController extends AppBaseController
 			->with('projects', $projects);
 	}
 
+	public function pcompleted()
+	{
+		$projects= Project::where('estado', '=', 'Terminado')->paginate(150);
+		if(empty($projects))
+		{
+			Flash::error('Solictud no encontrada');
+
+			return redirect(route('inicio.index'));
+		}
+
+		return view('projects.completed')
+			->with('projects', $projects);
+	}
+
+	public function acceso($id)
+	{
+		$project = $this->projectRepository->find($id);
+		$alumnos = $this->alumnoRepository->paginate(100);
+		$profesors = $this->profesorRepository->paginate(100);
+		$results = DB::table('alumnoproyectos')->select('id','nombre','rut','rol','id_proyecto')->get();
+		$cursos = Course::select('id','name_course')->get();
+
+		return view('projects.acceso')
+		->with('cursos', $cursos)
+		->with('project', $project)
+		->with('alumnos', $alumnos)
+		->with('profesors',$profesors)
+		->with('alumnoproyectos', $results);
+
+	}
+
+
+
 	public function create()
 	{
 		if(Auth::check()){
@@ -110,6 +143,7 @@ class ProjectController extends AppBaseController
 	public function store(CreateProjectRequest $request)
 	{
 		$input = $request->all();
+		$input['estado']='Vigente';
 		if(empty($input['evaluaciones']))
 		{
 
@@ -216,7 +250,7 @@ class ProjectController extends AppBaseController
 				->with('countdiagpregunta3si', $countdiagpregunta3si)
 				->with('countdiagpregunta1no', $countdiagpregunta1no)
 				->with('countdiagpregunta2no', $countdiagpregunta2no)
-				->with('countdiagpregunta3si', $countdiagpregunta3no)
+				->with('countdiagpregunta3no', $countdiagpregunta3no)
 				->with('countplanpregunta1si', $countplanpregunta1si)
 				->with('countplanpregunta2si', $countplanpregunta2si)
 				->with('countplanpregunta1no', $countplanpregunta1no)

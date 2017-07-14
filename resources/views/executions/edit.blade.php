@@ -7,7 +7,7 @@
 
     {!! Form::model($execution, ['route' => ['executions.update', $execution->id], 'method' => 'patch']) !!}
 
-        @include('executions.fields')
+        @include('executions.fields2')
 
     {!! Form::close() !!}
 </div>

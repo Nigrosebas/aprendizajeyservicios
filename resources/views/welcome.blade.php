@@ -57,6 +57,8 @@
          <h1 class="panel-title" align="center">Noticias</h1>
       </div>
       <div class="panel-body" align="center">
+      Desde acá se pueden acceder a los PROYECTOS ya terminados.
+      <a href="{!! route('projects.pcompleted') !!}"><i class="glyphicon glyphicon-edit"></i></a>
      </div>
     </div>
 
@@ -348,54 +350,54 @@
                         $(function () { 
                             var myChart3 = Highcharts.chart('container3', {
 
-    title: {
-        text: 'Proyectos en la {!! Auth::user()->coordinador->universidad->nombre_u !!}, 2017-2024'
-    },
+                              title: {
+                                  text: 'Proyectos en la {!! Auth::user()->coordinador->universidad->nombre_u !!}, 2017-2024'
+                              },
 
-    subtitle: {
-        text: ''
-    },
+                              subtitle: {
+                                  text: ''
+                              },
 
-    yAxis: {
-        title: {
-            text: 'Numero de Proyectos por Año'
-        }
-    },
-    legend: {
-        layout: 'vertical',
-        align: 'right',
-        verticalAlign: 'middle'
-    },
+                              yAxis: {
+                                  title: {
+                                      text: 'Numero de Proyectos por Año'
+                                  }
+                              },
+                              legend: {
+                                  layout: 'vertical',
+                                  align: 'right',
+                                  verticalAlign: 'middle'
+                              },
 
-    plotOptions: {
-        series: {
-            pointStart: 2017
-        }
-    },
+                              plotOptions: {
+                                  series: {
+                                      pointStart: 2017
+                                  }
+                              },
 
-    series: [{
-        name: 'Facultad 1',
-        data: [1, 2, 4, 8, 6, 10, 13, 25]
-    }, {
-        name: 'Facultad 2',
-        data: [1, 3, 3, 3, 8, 11, 12, 15]
-    }, {
-        name: 'Facultad 3',
-        data: [1, 5, 2, 8, 7, 12, 5, 15]
-    }, {
-        name: 'Facultad 4',
-        data: [1, 7, 8, 7, 3, 11, 10, 15]
-    }, {
-        name: 'Facultad 5',
-        data: [1, 5, 5, 6, 2, 9, 13, 15]
-    }]
+                              series: [{
+                                  name: 'Facultad 1',
+                                  data: [1, 2, 4, 8, 6, 10, 13, 25]
+                              }, {
+                                  name: 'Facultad 2',
+                                  data: [1, 3, 3, 3, 8, 11, 12, 15]
+                              }, {
+                                  name: 'Facultad 3',
+                                  data: [1, 5, 2, 8, 7, 12, 5, 15]
+                              }, {
+                                  name: 'Facultad 4',
+                                  data: [1, 7, 8, 7, 3, 11, 10, 15]
+                              }, {
+                                  name: 'Facultad 5',
+                                  data: [1, 5, 5, 6, 2, 9, 13, 15]
+                              }]
 
-});
+                          });
                         });
                     </script>
                 </div>
-                </div>      
-              </div>
+              </div>      
+            </div>
 
   @endif
 

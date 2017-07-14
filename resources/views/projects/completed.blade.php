@@ -7,15 +7,14 @@
         @include('flash::message')
 
         <div class="row">
-            <h1 class="pull-left">Proyectos</h1>
-            <a class="btn btn-primary pull-right" style="margin-top: 25px" href="{!! route('projects.create') !!}">Add New</a>
+            <h1 class="pull-left">Proyectos Terminados</h1>
         </div>
 
         <div class="row">
             @if($projects->isEmpty())
                 <div class="well text-center">No hay Proyectos.</div>
             @else
-                @include('projects.table')
+                @include('projects.table2')
             @endif
         </div>
 

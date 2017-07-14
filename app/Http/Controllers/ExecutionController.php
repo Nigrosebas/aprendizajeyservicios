@@ -57,7 +57,7 @@ class ExecutionController extends AppBaseController
 
 		Flash::success('Execution saved successfully.');
 
-		return redirect(route('executions.index'));
+		return redirect(route('inicio.index'));
 	}
 
 	/**
@@ -75,7 +75,7 @@ class ExecutionController extends AppBaseController
 		{
 			Flash::error('Execution not found');
 
-			return redirect(route('executions.index'));
+			return redirect(route('inicio.index'));
 		}
 
 		return view('executions.show')->with('execution', $execution);
@@ -96,7 +96,7 @@ class ExecutionController extends AppBaseController
 		{
 			Flash::error('Execution not found');
 
-			return redirect(route('executions.index'));
+			return redirect(route('inicio.index'));
 		}
 
 		return view('executions.edit')->with('execution', $execution);
@@ -118,14 +118,14 @@ class ExecutionController extends AppBaseController
 		{
 			Flash::error('Execution not found');
 
-			return redirect(route('executions.index'));
+			return redirect(route('inicio.index'));
 		}
 
 		$this->executionRepository->updateRich($request->all(), $id);
 
 		Flash::success('Execution updated successfully.');
 
-		return redirect(route('executions.index'));
+		return redirect(route('inicio.index'));
 	}
 
 	/**
@@ -143,13 +143,13 @@ class ExecutionController extends AppBaseController
 		{
 			Flash::error('Execution not found');
 
-			return redirect(route('executions.index'));
+			return redirect(route('inicio.index'));
 		}
 
 		$this->executionRepository->delete($id);
 
 		Flash::success('Execution deleted successfully.');
 
-		return redirect(route('executions.index'));
+		return redirect(route('inicio.index'));
 	}
 }

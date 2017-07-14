@@ -57,7 +57,7 @@ class PlanificationController extends AppBaseController
 
 		Flash::success('Planification saved successfully.');
 
-		return redirect(route('planifications.index'));
+		return redirect(route('inicio.index'));
 	}
 
 	/**
@@ -75,7 +75,7 @@ class PlanificationController extends AppBaseController
 		{
 			Flash::error('Planification not found');
 
-			return redirect(route('planifications.index'));
+			return redirect(route('inicio.index'));
 		}
 
 		return view('planifications.show')->with('planification', $planification);
@@ -96,7 +96,7 @@ class PlanificationController extends AppBaseController
 		{
 			Flash::error('Planification not found');
 
-			return redirect(route('planifications.index'));
+			return redirect(route('inicio.index'));
 		}
 
 		return view('planifications.edit')->with('planification', $planification);
@@ -118,14 +118,14 @@ class PlanificationController extends AppBaseController
 		{
 			Flash::error('Planification not found');
 
-			return redirect(route('planifications.index'));
+			return redirect(route('inicio.index'));
 		}
 
 		$this->planificationRepository->updateRich($request->all(), $id);
 
 		Flash::success('Planification updated successfully.');
 
-		return redirect(route('planifications.index'));
+		return redirect(route('inicio.index'));
 	}
 
 	/**
@@ -143,13 +143,13 @@ class PlanificationController extends AppBaseController
 		{
 			Flash::error('Planification not found');
 
-			return redirect(route('planifications.index'));
+			return redirect(route('inicio.index'));
 		}
 
 		$this->planificationRepository->delete($id);
 
 		Flash::success('Planification deleted successfully.');
 
-		return redirect(route('planifications.index'));
+		return redirect(route('inicio.index'));
 	}
 }

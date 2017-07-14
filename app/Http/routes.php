@@ -204,6 +204,10 @@ Route::get('registro', function () {
     return view('registro');
 });
 
+Route::get('projects/pcompleted', [
+    'as' => 'projects.pcompleted',
+    'uses' => 'ProjectController@pcompleted',
+]);
 
 Route::resource('projects', 'ProjectController');
 
@@ -214,6 +218,10 @@ Route::get('projects/{id}/delete', [
 Route::get('projects/{id}/mostrar', [
     'as' => 'projects.mostrar',
     'uses' => 'ProjectController@mostrar',
+]);
+Route::get('projects/{id}/acceso', [
+    'as' => 'projects.acceso',
+    'uses' => 'ProjectController@acceso',
 ]);
 
 Route::post('importExcel',[

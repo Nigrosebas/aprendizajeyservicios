@@ -57,7 +57,7 @@ class ClosingController extends AppBaseController
 
 		Flash::success('Closing saved successfully.');
 
-		return redirect(route('closings.index'));
+		return redirect(route('inicio.index'));
 	}
 
 	/**
@@ -75,7 +75,7 @@ class ClosingController extends AppBaseController
 		{
 			Flash::error('Closing not found');
 
-			return redirect(route('closings.index'));
+			return redirect(route('inicio.index'));
 		}
 
 		return view('closings.show')->with('closing', $closing);
@@ -96,7 +96,7 @@ class ClosingController extends AppBaseController
 		{
 			Flash::error('Closing not found');
 
-			return redirect(route('closings.index'));
+			return redirect(route('inicio.index'));
 		}
 
 		return view('closings.edit')->with('closing', $closing);
@@ -118,14 +118,14 @@ class ClosingController extends AppBaseController
 		{
 			Flash::error('Closing not found');
 
-			return redirect(route('closings.index'));
+			return redirect(route('inicio.index'));
 		}
 
 		$this->closingRepository->updateRich($request->all(), $id);
 
 		Flash::success('Closing updated successfully.');
 
-		return redirect(route('closings.index'));
+		return redirect(route('inicio.index'));
 	}
 
 	/**
@@ -143,13 +143,13 @@ class ClosingController extends AppBaseController
 		{
 			Flash::error('Closing not found');
 
-			return redirect(route('closings.index'));
+			return redirect(route('inicio.index'));
 		}
 
 		$this->closingRepository->delete($id);
 
 		Flash::success('Closing deleted successfully.');
 
-		return redirect(route('closings.index'));
+		return redirect(route('inicio.index'));
 	}
 }

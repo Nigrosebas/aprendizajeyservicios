@@ -1,7 +1,5 @@
 <!-- Id Project Field -->
 
-	{!! Form::hidden('id_project', $project->id, ['class' => 'form-control']) !!}
-
 
 
 	{!! Form::hidden('rut', Auth::user()->rut, ['class' => 'form-control']) !!}
@@ -17,6 +15,7 @@
     {!! Form::label('pregunta2', 'Pregunta2:') !!}
 	{!! Form::select('pregunta2',['No' => 'No','Si'=>'Si'], null, ['class' => 'form-control']) !!}
 </div>
+
 
 <!-- Submit Field -->
 <div class="form-group col-sm-12">

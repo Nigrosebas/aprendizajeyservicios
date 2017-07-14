@@ -118,9 +118,6 @@ $(function () {
                                     @endforeach
                                 </div>
                             </div>
-                            <div class="panel-footer">Cierre del Proyecto
-                            <a type="button" " href="#" class="btn btn-primary">Cerrar</a>
-                            </div>
                         </div>
                         <div class="row">
                         <legend id="personal"></legend>
@@ -291,8 +288,146 @@ $(function () {
 
     @endif
     <legend id="planificacion">Planificación</legend>
+        @if(Auth::user()->rol=='Alumno')
+            @if($consultarrutplanification->isEmpty())
+            <div class="panel-group">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                        <a data-toggle="collapse" href="#collapseplan">Formulario de la Etapa Planificación</a>
+                        </h4>
+                    </div>
+                    <div id="collapseplan" class="panel-collapse collapse">
+                        <div class="panel-body">
+
+                            @include('common.errors')
+
+                            {!! Form::open(['route' => 'planifications.store']) !!}
+
+                                @include('planifications.fields')
+
+                            {!! Form::close() !!}
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @else <div class="panel-group">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                        <a data-toggle="collapse" href="#collapseplan2">Formulario</a>
+                        </h4>
+                    </div>
+                    <div id="collapseplan2" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            Formulario ya respondido el {!!($createdplan->created_at)!!}
+                            <br>
+                            Si desea modificarlo click acá.
+                            <a href="{!! route('planifications.edit', [$createdplan->id]) !!}"><i class="glyphicon glyphicon-edit"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @endif
+    @endif
+    @if(Auth::user()->rol=='Profesor') 
+
+    @endif
     <legend id="ejecucion">Ejecución</legend>
+        @if(Auth::user()->rol=='Alumno')
+            @if($consultarrutexecution->isEmpty())
+            <div class="panel-group">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                        <a data-toggle="collapse" href="#collapseexe">Formulario de la Etapa Ejecución</a>
+                        </h4>
+                    </div>
+                    <div id="collapseexe" class="panel-collapse collapse">
+                        <div class="panel-body">
+
+                            @include('common.errors')
+
+                            {!! Form::open(['route' => 'executions.store']) !!}
+
+                                @include('executions.fields')
+
+                            {!! Form::close() !!}
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @else <div class="panel-group">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                        <a data-toggle="collapse" href="#collapseexe2">Formulario</a>
+                        </h4>
+                    </div>
+                    <div id="collapseexe2" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            Formulario ya respondido el {!!($createdexec->created_at)!!}
+                            <br>
+                            Si desea modificarlo click acá.
+                            <a href="{!! route('executions.edit', [$createdexec->id]) !!}"><i class="glyphicon glyphicon-edit"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @endif
+    @endif
+    @if(Auth::user()->rol=='Profesor') 
+
+    @endif
     <legend id="cierre">Cierre</legend>
+    @if(Auth::user()->rol=='Alumno')
+            @if($consultarrutclosing->isEmpty())
+            <div class="panel-group">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                        <a data-toggle="collapse" href="#collapseclos">Formulario de la Etapa Ejecución</a>
+                        </h4>
+                    </div>
+                    <div id="collapseclos" class="panel-collapse collapse">
+                        <div class="panel-body">
+
+                            @include('common.errors')
+
+                            {!! Form::open(['route' => 'closings.store']) !!}
+
+                                @include('closings.fields')
+
+                            {!! Form::close() !!}
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @else <div class="panel-group">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                        <a data-toggle="collapse" href="#collapseclos2">Formulario</a>
+                        </h4>
+                    </div>
+                    <div id="collapseclos2" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            Formulario ya respondido el {!!($createdclos->created_at)!!}
+                            <br>
+                            Si desea modificarlo click acá.
+                            <a href="{!! route('closings.edit', [$createdclos->id]) !!}"><i class="glyphicon glyphicon-edit"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @endif
+    @endif
+    @if(Auth::user()->rol=='Profesor') 
+
+    @endif
     <legend id="evaluacion">Evaluación</legend>
         <div class="panel-group">
             <div class="panel panel-default">
@@ -360,8 +495,154 @@ $(function () {
             </div>
             <div id="collapsediagnostico" class="panel-collapse collapse">
                 <div class="panel-body">
-                    <div id="container1" style="width:100%; height:400px;">
+                    <div id="containerdiag" style="width:100%; height:400px;">
                         <script type="text/javascript">
+                            $(function () { 
+                                var myChart = Highcharts.chart('containerdiag', {
+                                  chart: {
+                                      type: 'bar'
+                                  },
+                                  title: {
+                                      text: 'Encuesta Diagnostico'
+                                  },
+                                  xAxis: {
+                                      categories: ['Pregunta 1', 'Pregunta 2','Pregunta 3']
+                                  },
+                                  yAxis: {
+                                      title: {
+                                          text: 'Comparación'
+                                      }
+                                  },
+                                  series: [{
+                                      name: 'SI',
+                                      data: [{!!$countdiagpregunta1si !!},{!!$countdiagpregunta2si !!},{!!$countdiagpregunta3si !!}]
+                                  }, {
+                                      name: 'NO',
+                                      data: [{!!$countdiagpregunta1no !!},{!!$countdiagpregunta2no !!},{!!$countdiagpregunta3no !!}]
+                                  }]
+                                });
+                            });
+                        </script>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" href="#collapseplanificacion">Grafico Planificación</a>
+                </h4>
+            </div>
+            <div id="collapseplanificacion" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <div id="container3" style="width:100%; height:400px;">
+                        <script type="text/javascript">
+                            $(function () { 
+                                var myChart = Highcharts.chart('container3', {
+                                  chart: {
+                                      type: 'bar'
+                                  },
+                                  title: {
+                                      text: 'Encuesta Planificación'
+                                  },
+                                  xAxis: {
+                                      categories: ['Pregunta 1', 'Pregunta 2','Pregunta 3','Pregunta 4']
+                                  },
+                                  yAxis: {
+                                      title: {
+                                          text: 'Comparación'
+                                      }
+                                  },
+                                  series: [{
+                                      name: 'SI',
+                                      data: [{!!$countplanpregunta1si !!},{!!$countplanpregunta2si !!}]
+                                  }, {
+                                      name: 'NO',
+                                      data: [{!!$countplanpregunta1no !!},{!!$countplanpregunta2no !!}]
+                                  }]
+                                });
+                            });
+                        </script>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" href="#collapseejecucion">Grafico Ejecución</a>
+                </h4>
+            </div>
+            <div id="collapseejecucion" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <div id="container4" style="width:100%; height:400px;">
+                        <script type="text/javascript">
+                            $(function () { 
+                                var myChart = Highcharts.chart('container4', {
+                                  chart: {
+                                      type: 'bar'
+                                  },
+                                  title: {
+                                      text: 'Encuesta Ejecución'
+                                  },
+                                  xAxis: {
+                                      categories: ['Pregunta 1', 'Pregunta 2','Pregunta 3']
+                                  },
+                                  yAxis: {
+                                      title: {
+                                          text: 'Comparación'
+                                      }
+                                  },
+                                  series: [{
+                                      name: 'SI',
+                                      data: [{!!$countexepregunta1si !!},{!!$countexepregunta2si !!},{!!$countexepregunta3si !!}]
+                                  }, {
+                                      name: 'NO',
+                                      data: [{!!$countexepregunta1no !!},{!!$countexepregunta2no !!},{!!$countexepregunta3no !!}]
+                                  }]
+                                });
+                            });
+                        </script>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" href="#collapsecierre">Grafico Cierre</a>
+                </h4>
+            </div>
+            <div id="collapsecierre" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <div id="container5" style="width:100%; height:400px;">
+                        <script type="text/javascript">
+                            $(function () { 
+                                var myChart = Highcharts.chart('container5', {
+                                  chart: {
+                                      type: 'bar'
+                                  },
+                                  title: {
+                                      text: 'Encuesta Cierre'
+                                  },
+                                  xAxis: {
+                                      categories: ['Pregunta 1', 'Pregunta 2','Pregunta 3']
+                                  },
+                                  yAxis: {
+                                      title: {
+                                          text: 'Comparación'
+                                      }
+                                  },
+                                  series: [{
+                                      name: 'SI',
+                                      data: [{!!$countclopregunta1si !!},{!!$countclopregunta2si !!},{!!$countclopregunta3si !!}]
+                                  }, {
+                                      name: 'NO',
+                                      data: [{!!$countclopregunta1no !!},{!!$countclopregunta2no !!},{!!$countclopregunta3no !!}]
+                                  }]
+                                });
+                            });
                         </script>
                     </div>
                 </div>
@@ -372,14 +653,18 @@ $(function () {
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h4 class="panel-title">
-                    <a data-toggle="collapse" href="#collapsecierre">Finalización de Proyecto</a>
+                    <a data-toggle="collapse" href="#collapsefin">Finalización de Proyecto</a>
                 </h4>
             </div>
             {!! Form::model($project, ['route' => ['projects.update', $project->id], 'method' => 'patch']) !!}
-            <div id="collapsecierre" class="panel-collapse collapse">
+            <div id="collapsefin" class="panel-collapse collapse">
                 <div class="panel-body">
                     <div class="form-group col-sm-6 col-lg-12">
                     Con finalidad de poder mostrar éste proyecto y que sirva de ayuda, se debe completar lo siguiente:
+                    </div>
+                    <div class="form-group col-sm-6 col-lg-6">
+                        {!! Form::label('estado', 'Estado Final del Proyecto :') !!}
+                        {!! Form::select('estado',['Terminado' => 'Terminado','Cancelado'=>'Cancelado'], null, ['class' => 'form-control']) !!}
                     </div>
                     <div class="form-group col-sm-6 col-lg-12">
                         {!! Form::label('porcentaje', 'El Proyecto según su parecer alcanzó un :') !!}<br></br>

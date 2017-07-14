@@ -7,7 +7,7 @@
 
     {!! Form::model($planification, ['route' => ['planifications.update', $planification->id], 'method' => 'patch']) !!}
 
-        @include('planifications.fields')
+        @include('planifications.fields2')
 
     {!! Form::close() !!}
 </div>

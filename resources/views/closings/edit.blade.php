@@ -7,7 +7,7 @@
 
     {!! Form::model($closing, ['route' => ['closings.update', $closing->id], 'method' => 'patch']) !!}
 
-        @include('closings.fields')
+        @include('closings.fields2')
 
     {!! Form::close() !!}
 </div>
