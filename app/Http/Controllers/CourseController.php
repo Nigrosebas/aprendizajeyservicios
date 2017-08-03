@@ -25,6 +25,7 @@ class CourseController extends AppBaseController
 		$this->courseRepository = $courseRepo;
 		$this->facultyRepository = $facultyRepo;
 		$this->courseallRepository = $courseallRepo;
+		$this->middleware('auth');
 
 	}
 

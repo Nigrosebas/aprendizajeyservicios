@@ -1,9 +1,16 @@
+
 @extends('layouts.app')
 @section('content')
     <!-- Fixed navbar -->
 <div class="container theme-showcase" role="main">
 @include('flash::message')
+@if(Auth::check())
+<script type="text/javascript">
+  document.body.style.background = "@foreach($colorcito as $col){!!($col['code_background'])!!}@endforeach"
+</script>
+@endif
 @if(Auth::guest())
+
     <div id="myCarousel" class="carousel slide" data-ride="carousel">
       
       <!-- Indicators -->
@@ -75,15 +82,10 @@
           <div class="btn-group" role="group">
             <a type="button" href="{!! asset('alumnos/'.Auth::user()->alumno->id.'/edit')!!}" class="btn btn-default">Editar Perfil</a>
           </div>
-          <div class="btn-group" role="group">
-            <a type="button" class="btn btn-default">Ver Grupos</a>
-          </div>
-          <div class="btn-group" role="group">
-            <a type="button" class="btn btn-default">Habilidades</a>
-          </div>
         </div>
       </div>
     </div>
+
     <div class="panel panel-default">
       <div class="panel-heading">
          <h1 class="panel-title" align="center">Proyectos Asignados</h1>
@@ -98,7 +100,7 @@
               <th width="150px">Acceso</th>
             </thead>
           <tbody>
-          @foreach($alumnoproyectos as $aps)
+         @foreach($alumnoproyectos as $aps)
 
             @if($aps->rut == Auth::user()->alumno->rut_alumno) 
             
@@ -132,8 +134,8 @@
          <h1 class="panel-title" align="center">Noticias</h1>
       </div>
       <div class="panel-body" align="center">
-      Actualmente hay {!! $countproyectos!!} Proyectos Vigentes.
-      <br> De los cuales X están terminados.
+      Actualmente hay {!! $countproyectosvigentes!!} Proyectos Vigentes.
+      <br> De los cuales {!! $countproyectosterminados!!} están Terminados.
 
      </div>
     </div>
@@ -204,8 +206,77 @@
           <h1 class="panel-title" align="center">Bienvenido a la Interfaz de Coordinador de A+S</h1>
         </div>
         <div class="panel-body">
-          <h2>Hola {!! Auth::user()->coordinador->nombre !!}, su cuenta está configurada con la {!! Auth::user()->coordinador->universidad->nombre_u !!}<br>
-          Recuerde Añadir las Facultades, Cursos, Profesores y Alumnos al sistema.</h2>
+          <h2>Hola {!! Auth::user()->coordinador->nombre !!}, su cuenta está configurada con la {!! Auth::user()->coordinador->universidad->nombre_u !!}<br></h2>
+          <h2>Recuerde Añadir las Facultades, Cursos, Alumnos y Profesores al sistema. (En ese orden) .</h2>
+        </div>
+      </div>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h1 class="panel-title" align="center">Logo Universidad</h1>
+        </div>
+        <div class="panel-body">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-5">
+               <div class="panel panel-default">
+                  <div class="panel-heading">Información</div>
+                    <div class="panel-body">
+                      <div class="row">
+                        <div class="col-xs-6 ">
+                          <a class="thumbnail">
+                            <img src="{{ asset('storage/1.jpg') }}" alt="400x300">
+                          </a>
+                        </div>
+                        {!! Form::label('Seleccionar Color de Fondo :') !!}
+                        <div class="col-xs-6 ">
+                          <div id="cp2" class="input-group colorpicker-component">
+                            <input type="text" value="#1d6145" id="color_fondo" class="form-control" />
+                            <span class="input-group-addon"><i></i></span>
+                          </div>
+                          <a class="btn btn-sm btn-default enable-button" onclick="cambio_color(this)">Confirmar Color</a>
+
+                        </div>
+                        <script>
+                            $(function() {
+                                $('#cp2').colorpicker();
+                                $('#cp2').colorpicker().on('changeColor', function(e) {
+                                                    $('body')[0].style.backgroundColor = e.color.toString(
+                                                        'rgba');
+                                                  });
+                            });
+                        </script>
+                      </div>
+                    </div>
+                  </div>
+              </div>
+              <div class="col-md-6">
+                <div class="panel panel-default">
+                  <div class="panel-heading">Agregar archivos</div>
+                    <div class="panel-body">
+                        {!! Form::open(['route' => 'storage.store', 'files' => true]) !!}
+
+                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                        
+                        <div class="form-group">
+                          <label class="col-md-3 control-label">Nuevo Archivo</label>
+                          <div class="col-md-9">
+                            <input type="file" class="form-control" name="image" >
+                          </div>
+                        </div>
+             
+                        <div class="form-group">
+                          <div class="col-md-6 col-md-offset-4">
+                            <button type="submit" class="btn btn-primary">Enviar</button>
+                          </div>
+                        </div>
+
+                        {!! Form::close() !!}
+  
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
         </div>
       </div>
       <div class="panel panel-default">
@@ -250,7 +321,6 @@
       <a href="#demo" class="btn btn-info" data-toggle="collapse">Crear Profesor</a>
 
       <!--<a href="#demo2" class="btn btn-info" data-toggle="collapse">Añadir Cursos</a>-->
-      <a href="#demo3" class="btn btn-info" data-toggle="collapse">Ver Cursos</a><br></br><br></br>
       <div id="demo" class="collapse">
         <div class="panel panel-default">
           <div class="panel-heading">
@@ -265,25 +335,11 @@
           </div>
         </div>
       </div>
-      <div id="demo3" class="collapse">
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <h1 class="panel-title" align="center">Cursos</h1>
-          </div>
-              <div class="panel-body">
-            @if($courses->isEmpty())
-                <div class="well text-center">No Courses found.</div>
-            @else
-                @include('courses.table')
-            @endif
-            <!--@include('common.paginate', ['records' => $courses])-->
-          </div>
-        </div>
-      </div>
       <div id="demo2" class="collapse">
         <div class="panel panel-default">
           <div class="panel-heading">
             <h1 class="panel-title" align="center">Cargar Ramos</h1>
+
           </div>
           <div class="panel-body">
             <div class="container col-md-10">
@@ -305,12 +361,14 @@
               <div class="panel panel-default">
                 <div class="panel-heading">
                   <h1 class="panel-title" align="center">Cargar Alumnos</h1>
+
                 </div>
-                <div class="panel-body">
+                <div class="panel-body"><a align="right" type="button" class="btn btn-info btn-sm" data-container="body" data-toggle="popover" data-placement="right" data-content="En la columna Rut de la planilla rellenar sin puntos, ni guion, ni digito verificador."><span class="glyphicon glyphicon-info-sign"></span></a>
                   <div class="container col-md-10">
                     <a href="{{ URL::to('downloadExcel/csv') }}"><button class="btn btn-success">Descargar Planilla CSV</button></a><br>
                     <div style="border: 4px solid #a1a1a1;margin-top: 15px;padding: 10px;" class="form-group">
                       {!! Form::open(['route' => 'importExcel','method' => 'post','enctype' => 'multipart/form-data','class'=>'form-horizontal','data-allowed-file-extensions'=>'["csv"]' ]) !!}
+
                       <input type="file" name="import_file" />
                       <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>"/>
                     </div>
@@ -325,7 +383,7 @@
                 <div class="panel-heading ">
                   <h1 class="panel-title" align="center">Cargar Profesor</h1>
                 </div>
-                <div class="panel-body">
+                <div class="panel-body"><a align="right" type="button" class="btn btn-info btn-sm" data-container="body" data-toggle="popover" data-placement="right" data-content="En la columna Rut de la planilla rellenar sin puntos, ni guion, ni digito verificador."><span class="glyphicon glyphicon-info-sign"></span></a>
                   <div class="container col-md-10">
                     <a href="{{ URL::to('downloadExcelProfesor/csv') }}"><button class="btn btn-success">Descargar Planilla CSV</button></a><br>
                     <div style="border: 4px solid #a1a1a1;margin-top: 15px;padding: 10px;" class="form-group">
@@ -345,66 +403,90 @@
                   <h1 class="panel-title" align="center">Graficos</h1>
                 </div>
                 <div class="panel-body">
-                  <div id="container3" style="width:100%; height:400px;">
+                  <div id="container3" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
                     <script type="text/javascript">
                         $(function () { 
                             var myChart3 = Highcharts.chart('container3', {
 
-                              title: {
-                                  text: 'Proyectos en la {!! Auth::user()->coordinador->universidad->nombre_u !!}, 2017-2024'
-                              },
+                            title: {
+                                text: 'Cantidad de Proyectos por Facultad en Periodo 2017 - '
+                            },
 
-                              subtitle: {
-                                  text: ''
-                              },
+                            subtitle: {
+                                text: 'Fuente: Herramienta Web A+S'
+                            },
 
-                              yAxis: {
-                                  title: {
-                                      text: 'Numero de Proyectos por Año'
-                                  }
-                              },
-                              legend: {
-                                  layout: 'vertical',
-                                  align: 'right',
-                                  verticalAlign: 'middle'
-                              },
+                            yAxis: {
+                                title: {
+                                    text: 'Cantidad de Proyectos'
+                                }
+                            },
+                            xAxis: {
+                              allowDecimals: false,
+                            },
 
-                              plotOptions: {
-                                  series: {
-                                      pointStart: 2017
-                                  }
-                              },
+                            legend: {
+                                layout: 'vertical',
+                                align: 'right',
+                                verticalAlign: 'middle'
+                            },
 
-                              series: [{
-                                  name: 'Facultad 1',
-                                  data: [1, 2, 4, 8, 6, 10, 13, 25]
-                              }, {
-                                  name: 'Facultad 2',
-                                  data: [1, 3, 3, 3, 8, 11, 12, 15]
-                              }, {
-                                  name: 'Facultad 3',
-                                  data: [1, 5, 2, 8, 7, 12, 5, 15]
-                              }, {
-                                  name: 'Facultad 4',
-                                  data: [1, 7, 8, 7, 3, 11, 10, 15]
-                              }, {
-                                  name: 'Facultad 5',
-                                  data: [1, 5, 5, 6, 2, 9, 13, 15]
-                              }]
+                            plotOptions: {
+                                series: {
+                                    pointStart: 2017
+                                }
+                            },
 
-                          });
+                            series: [ 
+                               @foreach($test as $test2)
+                               { name : '{!! $test2->name_faculty !!}',
+                                 data : [{!!$test2->Cantidad !!},]
+                                },
+                                  @endforeach
+                              ]
+
                         });
+                      });
                     </script>
                 </div>
               </div>      
             </div>
-
   @endif
-
 @endif
 
 </div>
+<script type="text/javascript">
+$(function () {
+  $('[data-toggle="popover"]').popover()
+}) 
+</script>
+@if(Auth::check())
+  @if(Auth::user()->rol=='Coordinador') 
+<script type="text/javascript">
+  function cambio_color() {
+  var color = document.getElementById("color_fondo").value;
+  var misDatos = {
+    "id_university" : {!!Auth::user()->Coordinador->id_university !!},
+    "code_background" : color}
+  $.ajax({
+        type: "POST",
+        headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+        url:'{{ route("backgrounds.store")}}',
+        data: misDatos,
+        dataType:"json",
+        cache : false,
+        success: function(data){
+            if(data.success == true){
+            }
+        }
+        , error: function (xhr, ajaxOptions, thrownError) {
+        },
 
+    });
+  };
+</script>
+@endif
+@endif
 
 
 @endsection

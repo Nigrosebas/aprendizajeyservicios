@@ -13,7 +13,7 @@
 			<td>{!! $alumno->nombre !!}</td>
 			<td>{!! $alumno->email !!}</td>
             <td>Alumno</td>
-            <td><button onclick="add(this)"  class="btn btn-primary btn-xs">Agregar</button> </td>
+            <td id="alum-{!! $alumno->id !!}" style="text-align:center"><button onclick="add(this,'alum-{!! $alumno->id !!}')"  class="btn btn-primary btn-xs">Agregar</button> </td>
         </tr>
     @endforeach
         

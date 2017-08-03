@@ -31,6 +31,7 @@ class UsuarioController extends AppBaseController
 		$this->universityRepository = $universityRepo;
 		$this->profesorRepository = $profesorRepo;
 		$this->coordinadorRepository = $coordinadorRepo;
+		$this->middleware('auth');
 	}
 
 	/**

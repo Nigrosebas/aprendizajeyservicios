@@ -104,17 +104,17 @@ class ProjectController extends AppBaseController
 	public function acceso($id)
 	{
 		$project = $this->projectRepository->find($id);
-		$alumnos = $this->alumnoRepository->paginate(100);
-		$profesors = $this->profesorRepository->paginate(100);
-		$results = DB::table('alumnoproyectos')->select('id','nombre','rut','rol','id_proyecto')->get();
+		$alumnos = DB::table('alumnoproyectos')->where('id_proyecto','=',$project['id'])->select('nombre','rol','rut')->get();
 		$cursos = Course::select('id','name_course')->get();
+		$profesors = DB::table('profesors')->where('id','=',$project['id_profesor'])->select('nombre','rut_profesor')->first();
+		$universidad = DB::table('universities')->where('id','=',$project['id'])->first();
 
 		return view('projects.acceso')
 		->with('cursos', $cursos)
 		->with('project', $project)
-		->with('alumnos', $alumnos)
 		->with('profesors',$profesors)
-		->with('alumnoproyectos', $results);
+		->with('universidad',$universidad)
+		->with('alumnos', $alumnos);
 
 	}
 
@@ -173,13 +173,17 @@ class ProjectController extends AppBaseController
 	 */
 	public function show($id)
 	{
-		$project = $this->projectRepository->find($id);
-		$alumnos = $this->alumnoRepository->paginate(100);
-		$profesors = $this->profesorRepository->paginate(100);
-		$results = DB::table('alumnoproyectos')->select('id','nombre','rut','rol','id_proyecto')->get();
-		$cursos = Course::select('id','name_course')->get();
-
 		if(Auth::check()){
+				$project = $this->projectRepository->find($id);
+				if(Auth::user()->rol=='Profesor') {
+					//dd($alumnos);
+					$idprofe = Auth::user()->Profesor->id_university;
+					$alumnos = Alumno::where('id_university','=',$idprofe)->get();
+					$profesors = Profesor::where('id_university','=',$idprofe)->get();
+				}
+				$results = DB::table('alumnoproyectos')->select('id','nombre','rut','rol','id_proyecto')->get();
+				$cursos = Course::select('id','name_course')->get();
+
 				$rut = Auth::user()->rut;
             	$consultarrutmotivation = Motivation::where('rut','=',$rut)->select('rut')->get();
             	$consultarrutdiagnostic = Diagnostic::where('rut','=',$rut)->select('rut')->get();
@@ -192,40 +196,40 @@ class ProjectController extends AppBaseController
             	$createdexec = Execution::where('rut','=',$rut)->first();
             	$createdclos = Closing::where('rut','=',$rut)->first();
             if(Auth::user()->rol=='Profesor') {
-            	$countmotpregunta1si = Motivation::where('pregunta1','=','Si')->count();
-            	$countmotpregunta2si = Motivation::where('pregunta2','=','Si')->count();
-            	$countmotpregunta3si = Motivation::where('pregunta3','=','Si')->count();
-            	$countmotpregunta4si = Motivation::where('pregunta4','=','Si')->count();
-            	$countmotpregunta1no = Motivation::where('pregunta1','=','No')->count();
-            	$countmotpregunta2no = Motivation::where('pregunta2','=','No')->count();
-            	$countmotpregunta3no = Motivation::where('pregunta3','=','No')->count();
-            	$countmotpregunta4no = Motivation::where('pregunta4','=','No')->count();
+            	$countmotpregunta1si = Motivation::where('pregunta1','=','Si')->where('id_project','=',$id)->count();
+            	$countmotpregunta2si = Motivation::where('pregunta2','=','Si')->where('id_project','=',$id)->count();
+            	$countmotpregunta3si = Motivation::where('pregunta3','=','Si')->where('id_project','=',$id)->count();
+            	$countmotpregunta4si = Motivation::where('pregunta4','=','Si')->where('id_project','=',$id)->count();
+            	$countmotpregunta1no = Motivation::where('pregunta1','=','No')->where('id_project','=',$id)->count();
+            	$countmotpregunta2no = Motivation::where('pregunta2','=','No')->where('id_project','=',$id)->count();
+            	$countmotpregunta3no = Motivation::where('pregunta3','=','No')->where('id_project','=',$id)->count();
+            	$countmotpregunta4no = Motivation::where('pregunta4','=','No')->where('id_project','=',$id)->count();
 
-            	$countdiagpregunta1si = Diagnostic::where('pregunta1','=','Si')->count();
-            	$countdiagpregunta2si = Diagnostic::where('pregunta2','=','Si')->count();
-            	$countdiagpregunta3si = Diagnostic::where('pregunta3','=','Si')->count();
-            	$countdiagpregunta1no = Diagnostic::where('pregunta1','=','No')->count();
-            	$countdiagpregunta2no = Diagnostic::where('pregunta2','=','No')->count();
-            	$countdiagpregunta3no = Diagnostic::where('pregunta3','=','No')->count();
+            	$countdiagpregunta1si = Diagnostic::where('pregunta1','=','Si')->where('id_project','=',$id)->count();
+            	$countdiagpregunta2si = Diagnostic::where('pregunta2','=','Si')->where('id_project','=',$id)->count();
+            	$countdiagpregunta3si = Diagnostic::where('pregunta3','=','Si')->where('id_project','=',$id)->count();
+            	$countdiagpregunta1no = Diagnostic::where('pregunta1','=','No')->where('id_project','=',$id)->count();
+            	$countdiagpregunta2no = Diagnostic::where('pregunta2','=','No')->where('id_project','=',$id)->count();
+            	$countdiagpregunta3no = Diagnostic::where('pregunta3','=','No')->where('id_project','=',$id)->count();
 
-            	$countplanpregunta1si = Planification::where('pregunta1','=','Si')->count();
-            	$countplanpregunta2si = Planification::where('pregunta2','=','Si')->count();
-            	$countplanpregunta1no = Planification::where('pregunta1','=','No')->count();
-            	$countplanpregunta2no = Planification::where('pregunta2','=','No')->count();
+            	$countplanpregunta1si = Planification::where('pregunta1','=','Si')->where('id_project','=',$id)->count();
+            	$countplanpregunta2si = Planification::where('pregunta2','=','Si')->where('id_project','=',$id)->count();
+            	$countplanpregunta1no = Planification::where('pregunta1','=','No')->where('id_project','=',$id)->count();
+            	$countplanpregunta2no = Planification::where('pregunta2','=','No')->where('id_project','=',$id)->count();
 
-            	$countexepregunta1si = Execution::where('pregunta1','=','Si')->count();
-            	$countexepregunta2si = Execution::where('pregunta2','=','Si')->count();
-            	$countexepregunta3si = Execution::where('pregunta3','=','Si')->count();
-            	$countexepregunta1no = Execution::where('pregunta1','=','No')->count();
-            	$countexepregunta2no = Execution::where('pregunta2','=','No')->count();
-            	$countexepregunta3no = Execution::where('pregunta3','=','No')->count();
+            	$countexepregunta1si = Execution::where('pregunta1','=','Si')->where('id_project','=',$id)->count();
+            	$countexepregunta2si = Execution::where('pregunta2','=','Si')->where('id_project','=',$id)->count();
+            	$countexepregunta3si = Execution::where('pregunta3','=','Si')->where('id_project','=',$id)->count();
+            	$countexepregunta1no = Execution::where('pregunta1','=','No')->where('id_project','=',$id)->count();
+            	$countexepregunta2no = Execution::where('pregunta2','=','No')->where('id_project','=',$id)->count();
+            	$countexepregunta3no = Execution::where('pregunta3','=','No')->where('id_project','=',$id)->count();
 
-            	$countclopregunta1si = Closing::where('pregunta1','=','Si')->count();
-            	$countclopregunta2si = Closing::where('pregunta2','=','Si')->count();
-            	$countclopregunta3si = Closing::where('pregunta3','=','Si')->count();
-            	$countclopregunta1no = Closing::where('pregunta1','=','No')->count();
-            	$countclopregunta2no = Closing::where('pregunta2','=','No')->count();
-            	$countclopregunta3no = Closing::where('pregunta3','=','No')->count();
+            	$countclopregunta1si = Closing::where('pregunta1','=','Si')->where('id_project','=',$id)->count();
+            	$countclopregunta2si = Closing::where('pregunta2','=','Si')->where('id_project','=',$id)->count();
+            	$countclopregunta3si = Closing::where('pregunta3','=','Si')->where('id_project','=',$id)->count();
+            	$countclopregunta1no = Closing::where('pregunta1','=','No')->where('id_project','=',$id)->count();
+            	$countclopregunta2no = Closing::where('pregunta2','=','No')->where('id_project','=',$id)->count();
+            	$countclopregunta3no = Closing::where('pregunta3','=','No')->where('id_project','=',$id)->count();
             }
         
 			if(empty($project))

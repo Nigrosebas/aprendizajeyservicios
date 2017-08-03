@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 use Illuminate\Contracts\Auth\Guard;
+
 use Flash;
 use Closure;
 

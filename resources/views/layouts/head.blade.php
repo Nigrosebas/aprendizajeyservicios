@@ -24,6 +24,9 @@
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/1.3.0/handlebars.js"></script>
 <script src="http://code.highcharts.com/highcharts.js"></script>
 <script src="https://code.highcharts.com/modules/exporting.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-colorpicker/2.5.1/css/bootstrap-colorpicker.min.css" rel="stylesheet"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-colorpicker/2.5.1/js/bootstrap-colorpicker.min.js"></script>
+
 <script src="https://code.highcharts.com/highcharts-more.js"></script>
 <script src="{!! asset('package/es.js')!!}"></script>
 <script src="{!! asset('package/pace.js')!!}"></script>
@@ -33,6 +36,7 @@
 <link rel="stylesheet" href="{!! asset('package/nouislider.min.css')!!}">
 <script src="{!! asset('package/nouislider.js')!!}"></script>
 <script src="{!! asset('package/nouislider.min.js')!!}"></script>
+
 
 
 <!--<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/9.8.1/bootstrap-slider.js"></script>-->

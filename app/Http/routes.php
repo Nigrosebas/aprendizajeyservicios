@@ -192,6 +192,7 @@ Route::get('universities/{id}/delete', [
 ]);
 
 
+
 Route::resource('courses', 'CourseController');
 
 Route::get('courses/{id}/delete', [
@@ -312,4 +313,23 @@ Route::resource('closings', 'ClosingController');
 Route::get('closings/{id}/delete', [
     'as' => 'closings.delete',
     'uses' => 'ClosingController@destroy',
+]);
+    
+Route::get('formulario', 'StorageController@index');
+
+Route::post('storage/store', [
+    'as' => 'storage.store',
+    'uses' => 'StorageController@store',
+]);
+
+Route::resource('backgrounds', 'BackgroundController');
+
+Route::get('backgrounds/{id}/delete', [
+    'as' => 'backgrounds.delete',
+    'uses' => 'BackgroundController@destroy',
+]);
+
+Route::post('backgrounds/store', [
+    'as' => 'backgrounds.store',
+    'uses' => 'BackgroundController@store',
 ]);

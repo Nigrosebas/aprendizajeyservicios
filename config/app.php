@@ -140,6 +140,7 @@ return [
         Laracasts\Flash\FlashServiceProvider::class,
         Mitul\Generator\GeneratorServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -200,6 +201,7 @@ return [
         'Html'      => Collective\Html\HtmlFacade::class,
         'Excel'     => Maatwebsite\Excel\Facades\Excel::class,
         'Flash'     => Laracasts\Flash\Flash::class,
+        'Image' => Intervention\Image\Facades\Image::class,
 
     ],
 

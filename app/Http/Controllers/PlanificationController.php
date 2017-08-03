@@ -17,6 +17,7 @@ class PlanificationController extends AppBaseController
 	function __construct(PlanificationRepository $planificationRepo)
 	{
 		$this->planificationRepository = $planificationRepo;
+		$this->middleware('auth');
 	}
 
 	/**

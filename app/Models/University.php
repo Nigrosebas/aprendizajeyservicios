@@ -9,7 +9,8 @@ class University extends Model
     
 
 	public $fillable = [
-	    "nombre_u"
+	    "nombre_u",
+        "background_color"
 	];
 
     /**

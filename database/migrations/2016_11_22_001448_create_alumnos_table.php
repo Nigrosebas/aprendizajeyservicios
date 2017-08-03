@@ -17,6 +17,7 @@ class CreateAlumnosTable extends Migration
 		{
 			$table->increments('id');
 			$table->string('fecha_nacimiento');
+			$table->integer('id_university');
 			$table->string('email');
 			$table->string('nombre');
 			$table->string('telefono');

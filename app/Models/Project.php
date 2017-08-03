@@ -16,6 +16,7 @@ class Project extends Model
 		"porcentaje",
 		"objalcanzados",
 		"resumen",
+		"ramo",
 		"objetivos",
 		"resultados",
 		"conclusion",

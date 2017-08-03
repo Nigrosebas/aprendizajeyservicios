@@ -17,6 +17,7 @@ class ClosingController extends AppBaseController
 	function __construct(ClosingRepository $closingRepo)
 	{
 		$this->closingRepository = $closingRepo;
+		$this->middleware('auth');
 	}
 
 	/**

@@ -1,7 +1,8 @@
 <!-- Rut Field -->
 <div class="form-group">
 	<div class="form-group col-sm-6">
-	    {!! Form::label('rut', 'Rut:') !!}
+	    {!! Form::label('rut', 'Rut:') !!} Sin Guión, sin puntos ni codigo verificador.
+
 		{!! Form::text('rut', null, ['class' => 'form-control']) !!}
 	</div>
 

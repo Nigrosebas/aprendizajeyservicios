@@ -19,6 +19,7 @@ class AlumnoController extends AppBaseController
 	function __construct(AlumnoRepository $alumnoRepo)
 	{
 		$this->alumnoRepository = $alumnoRepo;
+		$this->middleware('auth');
 	}
 
 	/**

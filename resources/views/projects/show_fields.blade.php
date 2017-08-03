@@ -125,31 +125,37 @@ $(function () {
                             <div class="col-sm-12">
                                 <div class="panel panel-primary">
                                     <div class="panel-heading">
-                                        <h1 class="panel-title" align="center">Alumnos</h1>
+                                        <h1 class="panel-title" align="center">
+                                        <a data-toggle="collapse" href="#collapseAlumnos">Alumnos</a>
+                                        </h1>
                                     </div>
-                                    <div class="panel-body">
-                                        <div class="row">
-                                            @if($alumnos->isEmpty())
-                                            <div class="well text-center">No existen Alumnos aún.</div>
-                                                @else
+                                    <div id="collapseAlumnos" class="panel-collapse collapse">
+                                        <div class="panel-body">
+                                            <div class="row">
                                                 @include('alumnos.table2')
-                                            @endif
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+
+
                             <div class="col-sm-12">
                                 <div class="panel panel-primary">
                                     <div class="panel-heading">
-                                        <h1 class="panel-title" align="center">Profesores</h1>
+                                        <h1 class="panel-title" align="center">
+                                        <a data-toggle="collapse" href="#collapseProfesores">Profesores</a>
+                                        </h1>
                                     </div>
-                                    <div class="panel-body">
-                                        <div class="row">
-                                            @if($profesors->isEmpty())
-                                            <div class="well text-center">No existen Profesores aún.</div>
-                                                @else
-                                                @include('profesors.table2')
-                                            @endif
+                                    <div id="collapseProfesores" class="panel-collapse collapse">
+                                        <div class="panel-body">
+                                            <div class="row">
+                                                @if($profesors->isEmpty())
+                                                <div class="well text-center">No existen Profesores aún.</div>
+                                                    @else
+                                                    @include('profesors.table2')
+                                                @endif
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -681,7 +687,7 @@ $(function () {
 
                     <div class="form-group col-sm-6 col-lg-12">
                         {!! Form::label('resumen', 'Resumen:') !!}
-                        <a align"right" type="button" class="btn btn-info btn-sm" data-container="body" data-toggle="popover" data-placement="right" data-content="Vivamus sagittis lacus vel augue laoreet rutrum 
+                        <a align="right" type="button" class="btn btn-info btn-sm" data-container="body" data-toggle="popover" data-placement="right" data-content="Vivamus sagittis lacus vel augue laoreet rutrum 
                         faucibus."><span class="glyphicon glyphicon-info-sign"></span></a>
 
                         {!! Form::textarea('resumen', null, ['class' => 'form-control','rows' => 8, 'cols' => 150,'style' => 'resize: none']) !!}
@@ -732,15 +738,17 @@ $(function () {
     /*Smooth link animation*/
 
 
-function add(button) {
+function add(button,id) {
     var row = button.parentNode.parentNode;
   var cells = row.querySelectorAll('td:not(:last-of-type)');
   addToCartTable(cells);
+  document.getElementById(id).innerHTML = `<span class="glyphicon glyphicon-ok"></span>`;
 }
-function add2(button) {
+function add2(button,id) {
     var row = button.parentNode.parentNode;
   var cells = row.querySelectorAll('td:not(:last-of-type)');
   addToCartTable2(cells);
+  document.getElementById(id).innerHTML = `<span class="glyphicon glyphicon-ok"></span>`;
 }
 
 function remove() {

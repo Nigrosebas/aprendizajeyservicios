@@ -17,6 +17,8 @@ class ProfesorController extends AppBaseController
 	function __construct(ProfesorRepository $profesorRepo)
 	{
 		$this->profesorRepository = $profesorRepo;
+		$this->middleware('auth');
+		//$this->middleware('empresa',['only'=>['mostrar','create','store','show','edit','update','destroy']]);
 	}
 
 	/**

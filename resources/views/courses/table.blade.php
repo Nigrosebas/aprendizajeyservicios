@@ -2,14 +2,14 @@
     <thead>
 			<th>Facultad</th>
 			<th>Nombre del Curso</th>
-    <th width="50px">Action</th>
+    <th width="50px">Editar/Borrar</th>
     </thead>
     <tbody>
     @foreach($courses as $course)
         <tr>
 			<td>{!! $course->name_faculty !!}</td>
 			<td>{!! $course->name_course !!}</td>
-            <td>
+            <td align="center">
                 <a href="{!! route('courses.edit', [$course->id]) !!}"><i class="glyphicon glyphicon-edit"></i></a>
                 <a href="{!! route('courses.delete', [$course->id]) !!}" onclick="return confirm('Are you sure wants to delete this Course?')"><i class="glyphicon glyphicon-remove"></i></a>
             </td>

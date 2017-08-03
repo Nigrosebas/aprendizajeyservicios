@@ -17,6 +17,7 @@ class CourseallController extends AppBaseController
 	function __construct(CourseallRepository $courseallRepo)
 	{
 		$this->courseallRepository = $courseallRepo;
+				$this->middleware('auth');
 	}
 
 	/**

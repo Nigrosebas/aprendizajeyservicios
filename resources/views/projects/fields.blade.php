@@ -38,6 +38,10 @@
                     <div class="panel-heading">Nombre del Proyecto</div>
                     <div class="panel-body">{!! Form::text('project_name', null, ['class' => 'form-control']) !!}</div>
                 </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">Ramo en el que se impartirá el Proyecto</div>
+                    <div class="panel-body">{!! Form::text('ramo', null, ['class' => 'form-control']) !!}</div>
+                </div>
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="panel panel-default">

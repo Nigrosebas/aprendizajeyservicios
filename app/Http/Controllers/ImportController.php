@@ -24,6 +24,7 @@ class ImportController extends AppBaseController
 	function __construct(AlumnoRepository $alumnoRepo)
 	{
 		$this->alumnoRepository = $alumnoRepo;
+		$this->middleware('auth');
 	}
 
 
@@ -38,7 +39,7 @@ class ImportController extends AppBaseController
 				foreach ($data as $key => $value) 
 				{
 					$insert[] = ['rut' => $value->rut_alumno,'rol'=>'Alumno','usuario'=> $value->rut_alumno,'password' => bcrypt($value->rut_alumno)];
-					$insert2[]= ['rut_alumno' => $value->rut_alumno,'nombre' => $value->nombre,'email' => $value->email];
+					$insert2[]= ['rut_alumno' => $value->rut_alumno,'nombre' => $value->nombre,'email' => $value->email,'id_university' => Auth::user()->Coordinador->id_university];
 					
 				}
 				if(!empty($insert))

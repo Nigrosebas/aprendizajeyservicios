@@ -17,6 +17,7 @@ class DiagnosticController extends AppBaseController
 	function __construct(DiagnosticRepository $diagnosticRepo)
 	{
 		$this->diagnosticRepository = $diagnosticRepo;
+		$this->middleware('auth');
 	}
 
 	/**

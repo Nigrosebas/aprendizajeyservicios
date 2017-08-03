@@ -17,6 +17,7 @@ class CreateUniversitiesTable extends Migration
 		{
 			$table->increments('id');
 			$table->string('nombre_u');
+			$table->string('background_color');
 			$table->timestamps();
 		});
 	}

@@ -20,6 +20,7 @@ class CreateProjectsTable extends Migration
 			$table->integer('id_profesor')->unsigned();
 			$table->integer('id_university')->unsigned();
 			$table->integer('year');
+			$table->string('ramo');
 			$table->string('complejidad');
 			$table->string('duracion');
 			$table->string('evaluaciones');

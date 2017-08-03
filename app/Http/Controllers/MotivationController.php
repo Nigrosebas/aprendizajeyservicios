@@ -17,6 +17,7 @@ class MotivationController extends AppBaseController
 	function __construct(MotivationRepository $motivationRepo)
 	{
 		$this->motivationRepository = $motivationRepo;
+		$this->middleware('auth');
 	}
 
 	/**

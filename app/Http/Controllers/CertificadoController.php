@@ -19,6 +19,7 @@ class CertificadoController extends AppBaseController
 	function __construct(CertificadoRepository $certificadoRepo)
 	{
 		$this->certificadoRepository = $certificadoRepo;
+				$this->middleware('auth');
 	}
 
 	/**

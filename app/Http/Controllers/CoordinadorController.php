@@ -17,6 +17,7 @@ class CoordinadorController extends AppBaseController
 	function __construct(CoordinadorRepository $coordinadorRepo)
 	{
 		$this->coordinadorRepository = $coordinadorRepo;
+				$this->middleware('auth');
 	}
 
 	/**

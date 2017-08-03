@@ -17,6 +17,7 @@ class ExecutionController extends AppBaseController
 	function __construct(ExecutionRepository $executionRepo)
 	{
 		$this->executionRepository = $executionRepo;
+		$this->middleware('auth');
 	}
 
 	/**

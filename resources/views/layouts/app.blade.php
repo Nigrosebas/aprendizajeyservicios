@@ -13,8 +13,8 @@
                     <!--</div>-->
                 </div>
             </div>
-        <div class="footer">
-            @include('layouts.footer')
-        </div>
     </body>
+    <footer>
+            @include('layouts.footer')
+    </footer>
 </html>
