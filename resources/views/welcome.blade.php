@@ -72,7 +72,22 @@
 @endif
 @if(Auth::check())
   @if(Auth::user()->rol=='Alumno') 
-
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h1 class="panel-title" align="center">Bienvenido {!! Auth::user()->alumno->nombre!!}</h1>
+      </div>
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-xs-4 ">
+            <a class="thumbnail">
+              <img src="{!! asset('storage/'.Auth::user()->alumno->id_university.'.jpg') !!}" width="200" >
+            </a>
+          </div>
+ {!! Form::label('Coordinador de Universidad :') !!}
+              @foreach($coordinador as $coor){!!($coor->nombre)!!}<br>{!! Form::label('Correo :') !!}{!!($coor->email)!!}@endforeach
+        </div>
+      </div>
+    </div>
     <div class="panel panel-default">
       <div class="panel-heading">
          <h1 class="panel-title" align="center">Opciones</h1>
@@ -102,7 +117,7 @@
           <tbody>
          @foreach($alumnoproyectos as $aps)
 
-            @if($aps->rut == Auth::user()->alumno->rut_alumno) 
+            @if($aps->rut == Auth::user()->Alumno->rut_alumno) 
             
               <tr>
               <td>{!!$aps->nombre_proyecto!!}</td>
@@ -158,12 +173,19 @@
     </div>
     <div class="row">
       <div class="col-sm-6">
-        <div class="panel panel-info">
+        <div class="panel panel-default">
           <div class="panel-heading">
-            <h1 class="panel-title" align="center">Información</h1>
           </div>
           <div class="panel-body">
-            Recuerde rellenar todos los campos requeridos del perfil.
+            <div class="row">
+              <div class="col-xs-4 ">
+                <a class="thumbnail">
+                  <img src="{!! asset('storage/'.Auth::user()->profesor->id_university.'.jpg') !!}" width="200" >
+                </a>
+              </div>
+              {!! Form::label('Coordinador de Universidad :') !!}
+              @foreach($coordinador as $coor){!!($coor->nombre)!!}<br>{!! Form::label('Correo :') !!}{!!($coor->email)!!}@endforeach
+            </div>
           </div>
         </div>
       </div>
@@ -224,7 +246,7 @@
                       <div class="row">
                         <div class="col-xs-6 ">
                           <a class="thumbnail">
-                            <img src="{{ asset('storage/1.jpg') }}" alt="400x300">
+                            <img src="{!! asset('storage/'.Auth::user()->coordinador->id_university.'.jpg') !!}" >
                           </a>
                         </div>
                         {!! Form::label('Seleccionar Color de Fondo :') !!}
@@ -255,12 +277,12 @@
                     <div class="panel-body">
                         {!! Form::open(['route' => 'storage.store', 'files' => true]) !!}
 
-                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                        <input type="hidden" name="_token" value="{{ csrf_token() }}" >
                         
                         <div class="form-group">
                           <label class="col-md-3 control-label">Nuevo Archivo</label>
                           <div class="col-md-9">
-                            <input type="file" class="form-control" name="image" >
+                            <input type="file" class="form-control" name="image"  accept=".jpg">
                           </div>
                         </div>
              

@@ -176,7 +176,6 @@ class ProjectController extends AppBaseController
 		if(Auth::check()){
 				$project = $this->projectRepository->find($id);
 				if(Auth::user()->rol=='Profesor') {
-					//dd($alumnos);
 					$idprofe = Auth::user()->Profesor->id_university;
 					$alumnos = Alumno::where('id_university','=',$idprofe)->get();
 					$profesors = Profesor::where('id_university','=',$idprofe)->get();
@@ -292,8 +291,6 @@ class ProjectController extends AppBaseController
 				->with('createdexec',$createdexec)
 				->with('createdclos',$createdclos)
 				->with('project', $project)
-				->with('alumnos', $alumnos)
-				->with('profesors',$profesors)
 				->with('consultarrutmotivation',$consultarrutmotivation)
 				->with('consultarrutdiagnostic',$consultarrutdiagnostic)
 				->with('consultarrutplanification',$consultarrutplanification)

@@ -8,7 +8,7 @@
 
         <div class="row">
             <h1 class="pull-left">Usuarios</h1>
-            <a class="btn btn-primary pull-right" style="margin-top: 25px" href="{!! route('usuarios.create') !!}">Add New</a>
+            <a class="btn btn-primary pull-right" style="margin-top: 25px" href="{!! route('usuarios.create') !!}">Añadir nuevo</a>
         </div>
 
         <div class="row">

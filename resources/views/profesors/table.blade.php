@@ -4,7 +4,7 @@
 			<th>Email</th>
 			<th>Telefono</th>
 			<th>Foto Perfil</th>
-    <th width="50px">Action</th>
+    <th width="50px">Acciones</th>
     </thead>
     <tbody>
     @foreach($profesors as $profesor)
@@ -15,7 +15,7 @@
 			<td>{!! $profesor->foto_perfil !!}</td>
             <td>
                 <a href="{!! route('profesors.edit', [$profesor->id]) !!}"><i class="glyphicon glyphicon-edit"></i></a>
-                <a href="{!! route('profesors.delete', [$profesor->id]) !!}" onclick="return confirm('Are you sure wants to delete this Profesor?')"><i class="glyphicon glyphicon-remove"></i></a>
+                <a href="{!! route('profesors.delete', [$profesor->id]) !!}" onclick="return confirm('Seguro que deseas borrar al Profesor?')"><i class="glyphicon glyphicon-remove"></i></a>
             </td>
         </tr>
     @endforeach

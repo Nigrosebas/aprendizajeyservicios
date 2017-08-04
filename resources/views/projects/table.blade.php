@@ -16,7 +16,7 @@
             <td>
             <a href="{!! route('projects.show', [$project->id]) !!}"><i class="glyphicon glyphicon-th">Acceder</i></a>
                 <a href="{!! route('projects.edit', [$project->id]) !!}"><i class="glyphicon glyphicon-edit"></i></a>
-                <a href="{!! route('projects.delete', [$project->id]) !!}" onclick="return confirm('Are you sure wants to delete this Project?')"><i class="glyphicon glyphicon-remove"></i></a>
+                <a href="{!! route('projects.delete', [$project->id]) !!}" onclick="return confirm('Seguro qu deseas eliminar el Proyecto?')"><i class="glyphicon glyphicon-remove"></i></a>
             </td>
         </tr>
     @endforeach

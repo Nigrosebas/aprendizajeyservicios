@@ -13,7 +13,7 @@
 
         <div class="row">
             @if($planifications->isEmpty())
-                <div class="well text-center">No Planifications found.</div>
+                <div class="well text-center">No existen Planificaciones</div>
             @else
                 @include('planifications.table')
             @endif

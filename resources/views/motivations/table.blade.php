@@ -6,7 +6,7 @@
 			<th>Pregunta2</th>
 			<th>Pregunta3</th>
 			<th>Pregunta4</th>
-    <th width="50px">Action</th>
+    <th width="50px">Acciones</th>
     </thead>
     <tbody>
     @foreach($motivations as $motivation)
@@ -19,7 +19,7 @@
 			<td>{!! $motivation->pregunta4 !!}</td>
             <td>
                 <a href="{!! route('motivations.edit', [$motivation->id]) !!}"><i class="glyphicon glyphicon-edit"></i></a>
-                <a href="{!! route('motivations.delete', [$motivation->id]) !!}" onclick="return confirm('Are you sure wants to delete this Motivation?')"><i class="glyphicon glyphicon-remove"></i></a>
+                <a href="{!! route('motivations.delete', [$motivation->id]) !!}" onclick="return confirm('Está seguro de borrar la Motivación?')"><i class="glyphicon glyphicon-remove"></i></a>
             </td>
         </tr>
     @endforeach

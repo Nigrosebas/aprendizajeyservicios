@@ -15,7 +15,7 @@
 			<td>{!! $usuario->password !!}</td>
             <td>
                 <a href="{!! route('usuarios.edit', [$usuario->id]) !!}"><i class="glyphicon glyphicon-edit"></i></a>
-                <a href="{!! route('usuarios.delete', [$usuario->id]) !!}" onclick="return confirm('Are you sure wants to delete this Usuario?')"><i class="glyphicon glyphicon-remove"></i></a>
+                <a href="{!! route('usuarios.delete', [$usuario->id]) !!}" onclick="return confirm('Estas seguro de borrar al usuario?')"><i class="glyphicon glyphicon-remove"></i></a>
             </td>
         </tr>
     @endforeach

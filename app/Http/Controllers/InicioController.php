@@ -7,12 +7,14 @@ use App\Libraries\Repositories\ProjectRepository;
 use App\Libraries\Repositories\AlumnoProyectoRepository;
 use App\Libraries\Repositories\FacultyRepository;
 use App\Libraries\Repositories\BackgroundRepository;
+use App\Libraries\Repositories\CoordinadorRepository;
 use Mitul\Controller\AppBaseController as AppBaseController;
 use Response;
 use App\Models\Course;
 use App\Models\Project;
 use App\Models\AlumnoProyecto;
 use App\Models\Faculty;
+use App\Models\Coordinador;
 use App\Models\Background;
 use Auth;
 use DB;
@@ -27,13 +29,14 @@ class InicioController extends AppBaseController
     private $facultyRepository;
     private $backgroundRepository;
 
-    function __construct(CourseRepository $courseRepo,ProjectRepository $projectRepo,AlumnoProyectoRepository $alumnoProyectoRepo,FacultyRepository $facultyRepo, BackgroundRepository $backgroundRepo)
+    function __construct(CourseRepository $courseRepo,ProjectRepository $projectRepo,AlumnoProyectoRepository $alumnoProyectoRepo,FacultyRepository $facultyRepo, BackgroundRepository $backgroundRepo,CoordinadorRepository $coordinadorRepo)
     {
         $this->courseRepository = $courseRepo;
         $this->projectRepository = $projectRepo;
         $this->alumnoProyectoRepository = $alumnoProyectoRepo;
         $this->facultyRepository = $facultyRepo;
         $this->backgroundRepository = $backgroundRepo;
+        $this->coordinadorRepository = $coordinadorRepo;
     }
     /**
      * Create a new controller instance.
@@ -78,6 +81,7 @@ class InicioController extends AppBaseController
             }
             if(Auth::user()->rol=='Profesor') {
                 $idu = Auth::user()->Profesor->id_university;
+                $coordinador = DB::table('coordinadors')->where('id_university',$idu)->select('nombre','email')->get();
                 $colorcito = DB::table('backgrounds')->select('code_background')->where('id_university',$idu)->get();
                 $colorcito = json_decode(json_encode($colorcito), true);
 
@@ -88,10 +92,12 @@ class InicioController extends AppBaseController
                 ->with('countproyectosvigentes',$countproyectosvigentes)
                 ->with('countproyectosterminados',$countproyectosterminados)
                 ->with('colorcito',$colorcito)
+                ->with('coordinador',$coordinador)
                 ->with('faculties', $faculties);
             }
             if(Auth::user()->rol=='Alumno') {
                 $idu = Auth::user()->Alumno->id_university;
+                $coordinador = DB::table('coordinadors')->where('id_university',$idu)->select('nombre','email')->get();
                 $colorcito = DB::table('backgrounds')->select('code_background')->where('id_university',$idu)->get();
                 $colorcito = json_decode(json_encode($colorcito), true);
 
@@ -101,6 +107,7 @@ class InicioController extends AppBaseController
                 ->with('alumnoproyectos', $alumnoproyectos)
                 ->with('countproyectosvigentes',$countproyectosvigentes)
                 ->with('countproyectosterminados',$countproyectosterminados)
+                ->with('coordinador',$coordinador)
                 ->with('colorcito',$colorcito)
                 ->with('faculties', $faculties);
             }
