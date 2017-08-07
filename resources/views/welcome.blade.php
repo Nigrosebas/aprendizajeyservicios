@@ -5,10 +5,11 @@
 <div class="container theme-showcase" role="main">
 @include('flash::message')
 @if(Auth::check())
-<script type="text/javascript">
-  document.body.style.background = "@foreach($colorcito as $col){!!($col['code_background'])!!}@endforeach"
-</script>
+    <script type="text/javascript">
+      document.body.style.background = "@foreach($colorcito as $col){!!($col['code_background'])!!}@endforeach"
+    </script>
 @endif
+
 @if(Auth::guest())
 
     <div id="myCarousel" class="carousel slide" data-ride="carousel">

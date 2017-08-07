@@ -5,7 +5,7 @@
 			<th>Lectura</th>
 			<th>Escritura</th>
 			<th>Conversacion</th>
-    <th width="50px">Action</th>
+    <th width="50px">Acciones</th>
     </thead>
     <tbody>
     @foreach($idiomas as $idioma)
@@ -17,7 +17,7 @@
 			<td>{!! $idioma->conversacion !!}</td>
             <td>
                 <a href="{!! route('idiomas.edit', [$idioma->id]) !!}"><i class="glyphicon glyphicon-edit"></i></a>
-                <a href="{!! route('idiomas.delete', [$idioma->id]) !!}" onclick="return confirm('Are you sure wants to delete this Idioma?')"><i class="glyphicon glyphicon-remove"></i></a>
+                <a href="{!! route('idiomas.delete', [$idioma->id]) !!}" onclick="return confirm('Desea borrar el idioma?')"><i class="glyphicon glyphicon-remove"></i></a>
             </td>
         </tr>
     @endforeach

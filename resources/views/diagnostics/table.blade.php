@@ -5,7 +5,7 @@
 			<th>Pregunta1</th>
 			<th>Preguntar2</th>
 			<th>Pregunta3</th>
-    <th width="50px">Action</th>
+    <th width="50px">Acciones</th>
     </thead>
     <tbody>
     @foreach($diagnostics as $diagnostic)
@@ -17,7 +17,7 @@
 			<td>{!! $diagnostic->pregunta3 !!}</td>
             <td>
                 <a href="{!! route('diagnostics.edit', [$diagnostic->id]) !!}"><i class="glyphicon glyphicon-edit"></i></a>
-                <a href="{!! route('diagnostics.delete', [$diagnostic->id]) !!}" onclick="return confirm('Are you sure wants to delete this Diagnostic?')"><i class="glyphicon glyphicon-remove"></i></a>
+                <a href="{!! route('diagnostics.delete', [$diagnostic->id]) !!}" onclick="return confirm('Desea eliminar el Diagnostico')"><i class="glyphicon glyphicon-remove"></i></a>
             </td>
         </tr>
     @endforeach

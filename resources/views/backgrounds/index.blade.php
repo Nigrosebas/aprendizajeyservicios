@@ -13,7 +13,7 @@
 
         <div class="row">
             @if($backgrounds->isEmpty())
-                <div class="well text-center">No Backgrounds found.</div>
+                <div class="well text-center">No existen Backgrounds.</div>
             @else
                 @include('backgrounds.table')
             @endif

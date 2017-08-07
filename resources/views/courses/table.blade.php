@@ -11,7 +11,7 @@
 			<td>{!! $course->name_course !!}</td>
             <td align="center">
                 <a href="{!! route('courses.edit', [$course->id]) !!}"><i class="glyphicon glyphicon-edit"></i></a>
-                <a href="{!! route('courses.delete', [$course->id]) !!}" onclick="return confirm('Are you sure wants to delete this Course?')"><i class="glyphicon glyphicon-remove"></i></a>
+                <a href="{!! route('courses.delete', [$course->id]) !!}" onclick="return confirm('Está seguro de borrar la Carrera?')"><i class="glyphicon glyphicon-remove"></i></a>
             </td>
         </tr>
     @endforeach

@@ -73,7 +73,7 @@ class AlumnoProyectoController extends AppBaseController
 
 		if(empty($alumnoproyecto))
 		{
-			Flash::error('AlumnoProyecto not found');
+			Flash::error('Alumno-Proyecto no encontrado');
 
 			return redirect(route('alumnoproyectos.index'));
 		}
@@ -94,7 +94,7 @@ class AlumnoProyectoController extends AppBaseController
 
 		if(empty($alumnoproyecto))
 		{
-			Flash::error('AlumnoProyecto not found');
+			Flash::error('Alumno-Proyecto no encontrado');
 
 			return redirect(route('alumnoproyectos.index'));
 		}
@@ -116,14 +116,14 @@ class AlumnoProyectoController extends AppBaseController
 
 		if(empty($alumnoproyecto))
 		{
-			Flash::error('AlumnoProyecto not found');
+			Flash::error('Alumno-Proyecto no encontrado');
 
 			return redirect(route('alumnoproyectos.index'));
 		}
 
 		$this->alumnoProyectoRepository->updateRich($request->all(), $id);
 
-		Flash::success('AlumnoProyecto updated successfully.');
+		Flash::success('AlumnoProyecto actualizado');
 
 		return redirect(route('alumnoproyectos.index'));
 	}

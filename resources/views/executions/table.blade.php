@@ -5,7 +5,7 @@
 			<th>Pregunta1</th>
 			<th>Pregunta2</th>
 			<th>Pregunta3</th>
-    <th width="50px">Action</th>
+    <th width="50px">Acciones</th>
     </thead>
     <tbody>
     @foreach($executions as $execution)
@@ -17,7 +17,7 @@
 			<td>{!! $execution->pregunta3 !!}</td>
             <td>
                 <a href="{!! route('executions.edit', [$execution->id]) !!}"><i class="glyphicon glyphicon-edit"></i></a>
-                <a href="{!! route('executions.delete', [$execution->id]) !!}" onclick="return confirm('Are you sure wants to delete this Execution?')"><i class="glyphicon glyphicon-remove"></i></a>
+                <a href="{!! route('executions.delete', [$execution->id]) !!}" onclick="return confirm('Estas seguro de borrar una Ejecución?')"><i class="glyphicon glyphicon-remove"></i></a>
             </td>
         </tr>
     @endforeach

@@ -1,7 +1,7 @@
 <table class="table" id="todosloscursos">
     <thead>
     <th>Nombre Carrera</th>
-    <th width="50px">Action</th>
+    <th width="50px">Acciones</th>
     </thead>
     <tbody>
     @foreach($coursealls as $courseall)

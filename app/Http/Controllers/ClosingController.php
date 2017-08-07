@@ -56,7 +56,7 @@ class ClosingController extends AppBaseController
 
 		$closing = $this->closingRepository->create($input);
 
-		Flash::success('Closing saved successfully.');
+		Flash::success('Cierre guardado con Exito.');
 
 		return redirect(route('inicio.index'));
 	}

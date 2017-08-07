@@ -111,6 +111,14 @@ class InicioController extends AppBaseController
                 ->with('colorcito',$colorcito)
                 ->with('faculties', $faculties);
             }
+            if(Auth::user()->rol=='Administrador') {
+                $colorcito = DB::table('backgrounds')->select('code_background')->where('id_university',random_int(1,30))->get();
+                $colorcito = json_decode(json_encode($colorcito), true);
+                return view('welcome')
+                ->with('colorcito',$colorcito)
+                ->with('countproyectosvigentes',$countproyectosvigentes)
+                ->with('countproyectosterminados',$countproyectosterminados);
+            }
 
 
         }
